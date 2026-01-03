@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Zkaixian</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="home">主页</string>
+    <string name="chart">图表</string>
+    <string name="video">视频</string>
+    <string name="me">我</string>
 </resources>
