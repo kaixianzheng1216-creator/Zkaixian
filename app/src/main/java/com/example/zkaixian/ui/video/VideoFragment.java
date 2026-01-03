@@ -4,27 +4,38 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.example.zkaixian.R;
 import com.example.zkaixian.databinding.FragmentVideoBinding;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 public class VideoFragment extends Fragment {
     private FragmentVideoBinding binding;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        VideoViewModel videoViewModel = new ViewModelProvider(this).get(VideoViewModel.class);
-
         binding = FragmentVideoBinding.inflate(inflater, container, false);
 
         View root = binding.getRoot();
 
-        final TextView textView = binding.textVideo;
+        RefreshLayout refreshLayout = root.findViewById(R.id.refreshLayout);
 
-        videoViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
+
+        refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
+
+        refreshLayout.setOnRefreshListener(refreshlayout -> {
+            refreshlayout.finishRefresh(2000);
+        });
+
+        refreshLayout.setOnLoadMoreListener(refreshlayout -> {
+            refreshlayout.finishLoadMore(2000);
+        });
 
         return root;
     }
@@ -32,6 +43,7 @@ public class VideoFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
         binding = null;
     }
 }
