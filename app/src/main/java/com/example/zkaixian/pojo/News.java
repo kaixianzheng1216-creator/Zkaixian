@@ -3,11 +3,12 @@ package com.example.zkaixian.pojo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @NoArgsConstructor
 @Data
-public class News {
+public class News implements MultiItemEntity {
     @JsonProperty("id")
     private Integer id;
 
@@ -31,4 +32,9 @@ public class News {
 
     @JsonProperty("newsUrl")
     private String newsUrl;
+
+    @Override
+    public int getItemType() {
+        return getType();
+    }
 }

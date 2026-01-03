@@ -56,4 +56,6 @@ dependencies {
     implementation libs.jackson.annotations
     implementation libs.retrofit
     implementation libs.converter.gson
+    implementation libs.baserecyclerviewadapterhelper
+    implementation libs.banner
 }

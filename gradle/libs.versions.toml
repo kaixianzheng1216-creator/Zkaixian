@@ -4,6 +4,8 @@ agp = "8.4.2"
 appcompat = "1.6.1"
 appcompatVersion = "1.0.0"
 appintro = "6.3.1"
+banner = "2.2.3"
+baserecyclerviewadapterhelper = "3.0.14"
 constraintlayout = "2.1.4"
 converterGson = "2.9.0"
 coreSplashscreen = "1.0.1"
@@ -28,6 +30,8 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 appcompat-v100 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 appintro = { module = "com.github.AppIntro:AppIntro", version.ref = "appintro" }
+banner = { module = "io.github.youth5201314:banner", version.ref = "banner" }
+baserecyclerviewadapterhelper = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper", version.ref = "baserecyclerviewadapterhelper" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }

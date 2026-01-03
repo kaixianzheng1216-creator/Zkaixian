@@ -20,11 +20,6 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<List<News>> newsList = new MutableLiveData<>();
     private final MutableLiveData<List<News>> adList = new MutableLiveData<>();
 
-    public HomeViewModel() {
-        fetchNews();
-        fetchAds();
-    }
-
     public LiveData<List<News>> getNewsList() {
         return newsList;
     }
@@ -58,13 +53,13 @@ public class HomeViewModel extends ViewModel {
                 if (response.isSuccessful() && response.body() != null) {
                     newsList.setValue(response.body());
                 } else {
-                    Log.e("HomeViewModel", "请求失败: " + response.code());
+                    Log.e("HomeViewModel", "新闻请求失败: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<News>> call, @NonNull Throwable t) {
-                Log.e("HomeViewModel", "网络错误: " + t.getMessage());
+                Log.e("HomeViewModel", "新闻网络错误: " + t.getMessage());
             }
         });
     }
