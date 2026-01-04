@@ -1,6 +1,6 @@
 package com.example.zkaixian.pojo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
@@ -8,18 +8,18 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class Video {
-    @JsonProperty("id")
+    @SerializedName("id")
     private Integer id;
 
-    @JsonProperty("name")
+    @SerializedName("name")
     private String name;
 
-    @JsonProperty("img")
+    @SerializedName("img")
     private String img;
 
-    @JsonProperty("intro")
+    @SerializedName("intro")
     private String intro;
 
-    @JsonProperty("videoDetailList")
+    @SerializedName("videoDetailList")
     private List<VideoDetail> videoDetailList;
 }

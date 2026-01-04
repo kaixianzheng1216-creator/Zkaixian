@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Zkaixian</string>
     <string name="home">主页</string>
+    <string name="course">课程</string>
     <string name="chart">图表</string>
     <string name="video">视频</string>
     <string name="me">我</string>

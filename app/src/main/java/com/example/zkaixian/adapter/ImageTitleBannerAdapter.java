@@ -17,8 +17,8 @@ import com.youth.banner.adapter.BannerAdapter;
 
 import java.util.List;
 
-public class ImageTitleNumBannerAdapter extends BannerAdapter<News, ImageTitleNumBannerAdapter.BannerViewHolder> {
-    public ImageTitleNumBannerAdapter(List<News> mDatas) {
+public class ImageTitleBannerAdapter extends BannerAdapter<News, ImageTitleBannerAdapter.BannerViewHolder> {
+    public ImageTitleBannerAdapter(List<News> mDatas) {
         super(mDatas);
     }
 

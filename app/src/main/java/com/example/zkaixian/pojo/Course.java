@@ -1,21 +1,21 @@
 package com.example.zkaixian.pojo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
 public class Course {
-    @JsonProperty("id")
+    @SerializedName("id")
     private Integer id;
 
-    @JsonProperty("address")
+    @SerializedName("address")
     private String address;
 
-    @JsonProperty("content")
+    @SerializedName("content")
     private String content;
 
-    @JsonProperty("open_class")
+    @SerializedName("open_class")
     private String openClass;
 }

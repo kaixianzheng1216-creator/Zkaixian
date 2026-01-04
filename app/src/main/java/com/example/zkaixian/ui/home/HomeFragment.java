@@ -8,19 +8,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.zkaixian.R;
 import com.example.zkaixian.adapter.HomeAdapter;
 import com.example.zkaixian.adapter.ImageBannerAdapter;
-import com.example.zkaixian.adapter.ImageTitleNumBannerAdapter;
+import com.example.zkaixian.adapter.ImageTitleBannerAdapter;
 import com.example.zkaixian.databinding.FragmentHomeBinding;
+import com.example.zkaixian.pojo.News;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -52,30 +56,54 @@ public class HomeFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        binding.recyclerView.setLayoutManager(layoutManager);
+        initAdapter();
 
-        homeAdapter = new HomeAdapter(new ArrayList<>());
+        addHeaderView();
 
         binding.recyclerView.setAdapter(homeAdapter);
+    }
+
+    private void initAdapter() {
+        homeAdapter = new HomeAdapter(new ArrayList<>());
 
         homeAdapter.setEmptyView(R.layout.layout_empty_view);
 
+        homeAdapter.setOnItemClickListener(this::onNewsItemClick);
+    }
+
+    private void onNewsItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+        News item = homeAdapter.getData().get(position);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("url", item.getNewsUrl());
+
+        Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_webFragment, bundle);
+    }
+
+    private void addHeaderView() {
         View headerView = getLayoutInflater().inflate(R.layout.layout_home_header, binding.recyclerView, false);
 
-        homeAdapter.setHeaderView(headerView);
+        initHeaderBanner(headerView);
+        initHeaderMenu(headerView);
 
+        homeAdapter.setHeaderView(headerView);
+    }
+
+    private void initHeaderBanner(View headerView) {
         banner = headerView.findViewById(R.id.banner);
 
-        List<Integer> defaultImages = new ArrayList<>();
-        defaultImages.add(R.drawable.banner_default);
-        defaultImages.add(R.drawable.banner_default);
-        defaultImages.add(R.drawable.banner_default);
-        defaultImages.add(R.drawable.banner_default);
+        List<Integer> defaultImages = Collections.singletonList(R.drawable.banner_default);
 
         banner.addBannerLifecycleObserver(this)
                 .setAdapter(new ImageBannerAdapter(defaultImages));
+    }
+
+    private void initHeaderMenu(View headerView) {
+        headerView.findViewById(R.id.ll_menu_course).setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment);
+        });
     }
 
     private void initRefreshLayout() {
@@ -98,7 +126,7 @@ public class HomeFragment extends Fragment {
         homeViewModel.getAdList().observe(getViewLifecycleOwner(), ads -> {
             if (ads != null) {
                 banner.addBannerLifecycleObserver(this)
-                        .setAdapter(new ImageTitleNumBannerAdapter(ads));
+                        .setAdapter(new ImageTitleBannerAdapter(ads));
             }
         });
 

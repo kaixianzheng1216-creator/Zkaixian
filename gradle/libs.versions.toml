@@ -1,5 +1,6 @@
 [versions]
 activity = "1.9.3"
+agentwebCore = "v5.1.1-androidx"
 agp = "8.4.2"
 appcompat = "1.6.1"
 appcompatVersion = "1.0.0"
@@ -27,6 +28,7 @@ retrofit = "2.9.0"
 
 [libraries]
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+agentweb-core = { module = "io.github.justson:agentweb-core", version.ref = "agentwebCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 appcompat-v100 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 appintro = { module = "com.github.AppIntro:AppIntro", version.ref = "appintro" }

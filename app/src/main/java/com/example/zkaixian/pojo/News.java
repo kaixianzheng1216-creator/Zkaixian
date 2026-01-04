@@ -4,33 +4,33 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 @NoArgsConstructor
 @Data
 public class News implements MultiItemEntity {
-    @JsonProperty("id")
+    @SerializedName("id")
     private Integer id;
 
-    @JsonProperty("type")
+    @SerializedName("type")
     private Integer type;
 
-    @JsonProperty("newsName")
+    @SerializedName("newsName")
     private String newsName;
 
-    @JsonProperty("newsTypeName")
+    @SerializedName("newsTypeName")
     private String newsTypeName;
 
-    @JsonProperty("img1")
+    @SerializedName("img1")
     private String img1;
 
-    @JsonProperty("img2")
+    @SerializedName("img2")
     private String img2;
 
-    @JsonProperty("img3")
+    @SerializedName("img3")
     private String img3;
 
-    @JsonProperty("newsUrl")
+    @SerializedName("newsUrl")
     private String newsUrl;
 
     @Override
