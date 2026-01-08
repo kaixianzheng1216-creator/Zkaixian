@@ -41,7 +41,17 @@
         android:id="@+id/navigation_chart"
         android:name="com.example.zkaixian.ui.chart.ChartFragment"
         android:label="@string/chart"
-        tools:layout="@layout/fragment_chart" />
+        tools:layout="@layout/fragment_chart" >
+        <action
+            android:id="@+id/action_navigation_chart_to_lineFragment"
+            app:destination="@id/lineFragment" />
+        <action
+            android:id="@+id/action_navigation_chart_to_barFragment"
+            app:destination="@id/barFragment" />
+        <action
+            android:id="@+id/action_navigation_chart_to_pieFragment"
+            app:destination="@id/pieFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_video"
@@ -54,4 +64,22 @@
         android:name="com.example.zkaixian.ui.me.MeFragment"
         android:label="@string/me"
         tools:layout="@layout/fragment_me" />
+
+    <fragment
+        android:id="@+id/lineFragment"
+        android:name="com.example.zkaixian.ui.chart.line.LineFragment"
+        android:label="折线图"
+        tools:layout="@layout/fragment_line" />
+
+    <fragment
+        android:id="@+id/barFragment"
+        android:name="com.example.zkaixian.ui.chart.bar.BarFragment"
+        android:label="柱状图"
+        tools:layout="@layout/fragment_bar" />
+
+    <fragment
+        android:id="@+id/pieFragment"
+        android:name="com.example.zkaixian.ui.chart.pie.PieFragment"
+        android:label="饼图"
+        tools:layout="@layout/fragment_pie" />
 </navigation>
