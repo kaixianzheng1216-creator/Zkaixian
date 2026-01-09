@@ -1,8 +1,6 @@
 package com.example.zkaixian.ui.chart.line;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.zkaixian.R;
 import com.example.zkaixian.databinding.FragmentLineBinding;
+import com.example.zkaixian.utils.ChartStyleUtils;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -27,12 +24,10 @@ public class LineFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LineViewModel lineViewModel = new ViewModelProvider(this).get(LineViewModel.class);
-
         binding = FragmentLineBinding.inflate(inflater, container, false);
 
-        View root = binding.getRoot();
-
         LineChart lineChart = binding.lineChart;
+        ChartStyleUtils.initXYChartStyle(lineChart);
 
         lineViewModel.getData().observe(getViewLifecycleOwner(), data -> {
             ArrayList<Entry> entryList = new ArrayList<>();
@@ -43,38 +38,34 @@ public class LineFragment extends Fragment {
                 xAxisLabels[i] = data.get(i).getName();
             }
 
-            LineDataSet lineDataSet = new LineDataSet(entryList, "销售额");
+            lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabels));
+
+            LineDataSet lineDataSet = new LineDataSet(entryList, "销售额趋势");
+            lineDataSet.setValueTextSize(10f);
+
             lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-            lineDataSet.setColor(R.color.blue_7);
+            lineDataSet.setColor(ChartStyleUtils.COLOR_PRIMARY);
+            lineDataSet.setCircleColor(ChartStyleUtils.COLOR_PRIMARY);
+            lineDataSet.setLineWidth(2f);
+            lineDataSet.setCircleRadius(4f);
+            lineDataSet.setDrawCircleHole(false);
             lineDataSet.setDrawFilled(true);
+            lineDataSet.setFillColor(ChartStyleUtils.COLOR_PRIMARY);
             lineDataSet.setFillAlpha(50);
-            lineDataSet.setDrawCircles(false);
-            lineDataSet.setDrawValues(false);
 
             LineData lineData = new LineData(lineDataSet);
+
             lineChart.setData(lineData);
-
-            XAxis xAxis = lineChart.getXAxis();
-            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-            xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisLabels));
-
-            lineChart.getAxisRight().setEnabled(false);
-            lineChart.getAxisLeft().setDrawGridLines(false);
-            lineChart.getXAxis().setDrawGridLines(false);
-            lineChart.getDescription().setEnabled(false);
-            lineChart.getLegend().setEnabled(false);
-
-            lineChart.notifyDataSetChanged();
+            lineChart.animateY(1000);
             lineChart.invalidate();
         });
 
-        return root;
+        return binding.getRoot();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         binding = null;
     }
 }
