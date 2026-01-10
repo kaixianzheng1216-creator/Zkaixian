@@ -6,9 +6,11 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.youth.banner.adapter.BannerAdapter;
+
 import java.util.List;
 
-public class ImageBannerAdapter extends com.youth.banner.adapter.BannerAdapter<Integer, ImageBannerAdapter.BannerViewHolder> {
+public class ImageBannerAdapter extends BannerAdapter<Integer, ImageBannerAdapter.BannerViewHolder> {
     public ImageBannerAdapter(List<Integer> mDatas) {
         super(mDatas);
     }

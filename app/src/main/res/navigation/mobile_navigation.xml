@@ -30,7 +30,6 @@
         android:name="com.example.zkaixian.ui.web.WebFragment"
         android:label="详情"
         tools:layout="@layout/fragment_web">
-
         <argument
             android:name="target_url"
             android:defaultValue=""
@@ -57,7 +56,11 @@
         android:id="@+id/navigation_video"
         android:name="com.example.zkaixian.ui.video.VideoFragment"
         android:label="@string/video"
-        tools:layout="@layout/fragment_video" />
+        tools:layout="@layout/fragment_video">
+        <action
+            android:id="@+id/action_navigation_video_to_videoDetailFragment"
+            app:destination="@id/videoDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_me"
@@ -82,4 +85,10 @@
         android:name="com.example.zkaixian.ui.chart.pie.PieFragment"
         android:label="饼图"
         tools:layout="@layout/fragment_pie" />
+
+    <fragment
+        android:id="@+id/videoDetailFragment"
+        android:name="com.example.zkaixian.ui.video.detail.VideoDetailFragment"
+        android:label="视频详情"
+        tools:layout="@layout/fragment_video_detail" />
 </navigation>

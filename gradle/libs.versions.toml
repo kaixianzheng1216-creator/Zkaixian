@@ -13,6 +13,8 @@ converterGson = "2.9.0"
 coreSplashscreen = "1.0.1"
 espressoCore = "3.5.1"
 glide = "4.16.0"
+gsyvideoplayer = "11.3.0"
+gsyvideoplayerVersion = "v8.6.0-release-jitpack"
 jacksonAnnotations = "2.15.2"
 jacksonDatabind = "2.15.2"
 junit = "4.13.2"
@@ -43,7 +45,9 @@ converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref
 core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+github-gsyvideoplayer = { module = "com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer", version.ref = "gsyvideoplayerVersion" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+gsyvideoplayer = { module = "com.shuyu:gsyvideoplayer", version.ref = "gsyvideoplayer" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jacksonDatabind" }
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jacksonAnnotations" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

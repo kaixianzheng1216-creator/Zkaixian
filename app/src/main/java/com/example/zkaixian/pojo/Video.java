@@ -3,11 +3,14 @@ package com.example.zkaixian.pojo;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.io.Serializable;
 import java.util.List;
 
 @NoArgsConstructor
 @Data
-public class Video {
+public class Video implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @SerializedName("id")
     private Integer id;
 

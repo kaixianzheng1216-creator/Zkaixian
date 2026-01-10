@@ -62,4 +62,5 @@ dependencies {
     implementation libs.agentweb.core
     implementation libs.boommenu
     implementation libs.mpandroidchart
+    implementation libs.github.gsyvideoplayer
 }

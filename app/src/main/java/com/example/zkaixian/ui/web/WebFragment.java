@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import com.example.zkaixian.databinding.FragmentChartBinding;
+import com.example.zkaixian.databinding.FragmentWebBinding;
 import com.just.agentweb.AgentWeb;
 
 public class WebFragment extends Fragment {
@@ -19,7 +19,7 @@ public class WebFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentChartBinding binding = FragmentChartBinding.inflate(inflater, container, false);
+        FragmentWebBinding binding = FragmentWebBinding.inflate(inflater, container, false);
 
         ConstraintLayout root = binding.getRoot();
 

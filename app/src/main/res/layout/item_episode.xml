@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_episode_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="45dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_episode_item"
+    android:gravity="center_vertical|start"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:text="01-jQuery初体验"
+    android:textColor="#333333"
+    android:textSize="14sp"
+    android:maxLines="2"
+    android:ellipsize="end" />
