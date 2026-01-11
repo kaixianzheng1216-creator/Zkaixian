@@ -16,20 +16,20 @@ public class LineViewModel extends ViewModel {
         List<Line> list = new ArrayList<>();
 
         list.add(new Line() {{
-            setName("1月");
-            setValue(100);
+            setName("第一周");
+            setValue(156);
         }});
         list.add(new Line() {{
-            setName("2月");
-            setValue(130);
+            setName("第二周");
+            setValue(289);
         }});
         list.add(new Line() {{
-            setName("3月");
-            setValue(120);
+            setName("第三周");
+            setValue(435);
         }});
         list.add(new Line() {{
-            setName("4月");
-            setValue(160);
+            setName("第四周");
+            setValue(680);
         }});
 
         data.setValue(list);

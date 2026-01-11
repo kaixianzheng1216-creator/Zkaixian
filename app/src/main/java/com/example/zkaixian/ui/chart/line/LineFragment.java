@@ -25,6 +25,8 @@ public class LineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LineViewModel lineViewModel = new ViewModelProvider(this).get(LineViewModel.class);
         binding = FragmentLineBinding.inflate(inflater, container, false);
+        
+        binding.getRoot().findViewById(com.example.zkaixian.R.id.iv_back).setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
 
         LineChart lineChart = binding.lineChart;
         ChartStyleUtils.initXYChartStyle(lineChart);
@@ -40,7 +42,7 @@ public class LineFragment extends Fragment {
 
             lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabels));
 
-            LineDataSet lineDataSet = new LineDataSet(entryList, "销售额趋势");
+            LineDataSet lineDataSet = new LineDataSet(entryList, "新增用户数");
             lineDataSet.setValueTextSize(10f);
 
             lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);

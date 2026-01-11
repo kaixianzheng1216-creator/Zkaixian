@@ -12,22 +12,63 @@ import androidx.navigation.Navigation;
 
 import com.example.zkaixian.databinding.FragmentSecurityPrivacyBinding;
 import com.example.zkaixian.utils.UserStorage;
-import com.google.android.material.snackbar.Snackbar;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.interfaces.SimpleCallback;
 
 public class SecurityPrivacyFragment extends Fragment {
     private FragmentSecurityPrivacyBinding binding;
     private UserStorage userStorage;
-    private static final String MOCK_CODE = "123456";
+    private SecurityPrivacyViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSecurityPrivacyBinding.inflate(inflater, container, false);
         userStorage = new UserStorage(requireContext());
+        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(SecurityPrivacyViewModel.class);
 
         initView();
+        initObservers();
         initListener();
 
         return binding.getRoot();
+    }
+
+    private void initObservers() {
+        viewModel.getSendCodeResult().observe(getViewLifecycleOwner(), success -> {
+            if (success) {
+                new XPopup.Builder(requireContext())
+                        .asLoading("验证码发送成功")
+                        .show()
+                        .delayDismiss(1500);
+            }
+        });
+
+        viewModel.getUpdatePasswordResult().observe(getViewLifecycleOwner(), success -> {
+            if (success) {
+                new XPopup.Builder(requireContext())
+                        .dismissOnTouchOutside(false)
+                        .setPopupCallback(new SimpleCallback() {
+                            @Override
+                            public void onDismiss(BasePopupView popupView) {
+                                Navigation.findNavController(binding.getRoot()).navigateUp();
+                            }
+                        })
+                        .asLoading("密码修改成功")
+                        .show()
+                        .delayDismiss(800);
+            }
+        });
+
+        viewModel.getError().observe(getViewLifecycleOwner(), errorMsg -> {
+            if (binding != null) {
+                new XPopup.Builder(requireContext())
+                        .asConfirm("提示", errorMsg,
+                                null, "确定",
+                                null, null, true)
+                        .show();
+            }
+        });
     }
 
     private void initView() {
@@ -45,31 +86,42 @@ public class SecurityPrivacyFragment extends Fragment {
     }
 
     private void sendVerifyCode() {
-        Snackbar.make(binding.getRoot(), "验证码已发送：" + MOCK_CODE, Snackbar.LENGTH_LONG).show();
+        String email = userStorage.getEmail();
+        if (TextUtils.isEmpty(email)) {
+            new XPopup.Builder(requireContext())
+                    .asConfirm("提示", "获取当前用户邮箱失败",
+                            null, "确定",
+                            null, null, true)
+                    .show();
+            return;
+        }
+        viewModel.sendCode(email);
     }
 
     private void updatePassword(View v) {
         String code = binding.securityPrivacyEtVerifyCodeInput.getText().toString().trim();
         String password = binding.securityPrivacyEtNewPasswordInput.getText().toString().trim();
+        String email = userStorage.getEmail();
 
         if (TextUtils.isEmpty(code) || TextUtils.isEmpty(password)) {
-            Snackbar.make(v, "请填写完整信息", Snackbar.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!MOCK_CODE.equals(code)) {
-            Snackbar.make(v, "验证码错误", Snackbar.LENGTH_SHORT).show();
+            new XPopup.Builder(requireContext())
+                    .asConfirm("提示", "请填写完整信息",
+                            null, "确定",
+                            null, null, true)
+                    .show();
             return;
         }
 
         if (password.length() < 6) {
-            Snackbar.make(v, "新密码长度至少6位", Snackbar.LENGTH_SHORT).show();
+            new XPopup.Builder(requireContext())
+                    .asConfirm("提示", "新密码长度至少6位",
+                            null, "确定",
+                            null, null, true)
+                    .show();
             return;
         }
 
-        Snackbar.make(v, "密码修改成功", Snackbar.LENGTH_SHORT).show();
-
-        Navigation.findNavController(v).navigateUp();
+        viewModel.updatePassword(email, code, password);
     }
 
     @Override

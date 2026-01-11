@@ -16,20 +16,20 @@ public class PieViewModel extends ViewModel {
         List<Pie> list = new ArrayList<>();
 
         list.add(new Pie() {{
-            setName("北区");
-            setValue(40);
+            setName("Android");
+            setValue(45);
         }});
         list.add(new Pie() {{
-            setName("南区");
-            setValue(25);
+            setName("Backend");
+            setValue(30);
         }});
         list.add(new Pie() {{
-            setName("东区");
-            setValue(20);
-        }});
-        list.add(new Pie() {{
-            setName("西区");
+            setName("Web");
             setValue(15);
+        }});
+        list.add(new Pie() {{
+            setName("AI");
+            setValue(10);
         }});
 
         data.setValue(list);

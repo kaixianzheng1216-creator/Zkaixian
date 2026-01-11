@@ -24,6 +24,8 @@ public class CourseFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCourseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        
+        root.findViewById(R.id.iv_back).setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
 
         initViewModel();
 

@@ -18,15 +18,15 @@ public class ChartViewModel extends ViewModel {
 
         Button btn1 = new Button();
         btn1.setImageId(R.drawable.bar_chart_24px);
-        btn1.setTitle("柱状图");
+        btn1.setTitle("编程语言热度");
 
         Button btn2 = new Button();
         btn2.setImageId(R.drawable.show_chart_24px);
-        btn2.setTitle("折线图");
+        btn2.setTitle("用户增长趋势");
 
         Button btn3 = new Button();
         btn3.setImageId(R.drawable.pie_chart_24px);
-        btn3.setTitle("饼图");
+        btn3.setTitle("技术栈分布占比");
 
         list.add(btn1);
         list.add(btn2);

@@ -28,6 +28,8 @@ public class PieFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         PieViewModel pieViewModel = new ViewModelProvider(this).get(PieViewModel.class);
         binding = FragmentPieBinding.inflate(inflater, container, false);
+        
+        binding.getRoot().findViewById(com.example.zkaixian.R.id.iv_back).setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
 
         PieChart pieChart = binding.pieChart;
         initPieSpecificStyle(pieChart);
@@ -38,7 +40,7 @@ public class PieFragment extends Fragment {
                 entries.add(new PieEntry((float) pie.getValue(), pie.getName()));
             }
 
-            PieDataSet dataSet = new PieDataSet(entries, "区域分布占比");
+            PieDataSet dataSet = new PieDataSet(entries, "技术栈分布占比");
             dataSet.setColors(ChartStyleUtils.COLORS);
             dataSet.setSliceSpace(2f);
             dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
@@ -61,14 +63,22 @@ public class PieFragment extends Fragment {
         chart.setUsePercentValues(true);
         chart.setTransparentCircleAlpha(110);
 
-        chart.setCenterText("区域\n分布");
+        // 设置额外偏移量，防止图表与边缘或Legend重叠
+        chart.setExtraOffsets(5.f, 10.f, 5.f, 5.f);
+
+        chart.setCenterText("技术\n栈");
         chart.setCenterTextSize(14f);
         chart.setCenterTextColor(Color.GRAY);
 
         Legend l = chart.getLegend();
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setYOffset(0f);
+        // 修改Legend位置到底部居中，避免与图表挤在一起
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+        l.setYOffset(5f);
+        l.setXEntrySpace(10f);
+        l.setWordWrapEnabled(true);
     }
 
     @Override

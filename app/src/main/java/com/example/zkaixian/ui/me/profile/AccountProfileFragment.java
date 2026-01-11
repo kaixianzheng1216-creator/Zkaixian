@@ -21,16 +21,49 @@ import com.lxj.xpopup.interfaces.SimpleCallback;
 public class AccountProfileFragment extends Fragment {
     private FragmentAccountProfileBinding binding;
     private UserStorage userStorage;
+    private AccountProfileViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAccountProfileBinding.inflate(inflater, container, false);
         userStorage = new UserStorage(requireContext());
+        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(AccountProfileViewModel.class);
 
         initView();
+        initObservers();
         initListener();
 
         return binding.getRoot();
+    }
+
+    private void initObservers() {
+        viewModel.getUpdateResult().observe(getViewLifecycleOwner(), user -> {
+            if (user != null) {
+                userStorage.updateProfile(user.getUsername(), user.getBio());
+
+                new XPopup.Builder(requireContext())
+                        .dismissOnTouchOutside(false)
+                        .setPopupCallback(new SimpleCallback() {
+                            @Override
+                            public void onDismiss(BasePopupView popupView) {
+                                Navigation.findNavController(binding.getRoot()).navigateUp();
+                            }
+                        })
+                        .asLoading("个人资料保存成功")
+                        .show()
+                        .delayDismiss(800);
+            }
+        });
+
+        viewModel.getError().observe(getViewLifecycleOwner(), errorMsg -> {
+            if (binding != null) {
+                new XPopup.Builder(requireContext())
+                        .asConfirm("提示", errorMsg,
+                                null, "确定",
+                                null, null, true)
+                        .show();
+            }
+        });
     }
 
     private void initView() {
@@ -60,6 +93,7 @@ public class AccountProfileFragment extends Fragment {
     private void saveProfile(View v) {
         String name = binding.accountProfileEtNicknameInput.getText().toString().trim();
         String bio = binding.accountProfileEtBioInput.getText().toString().trim();
+        String email = userStorage.getEmail();
 
         if (TextUtils.isEmpty(name)) {
             new XPopup.Builder(requireContext())
@@ -70,19 +104,7 @@ public class AccountProfileFragment extends Fragment {
             return;
         }
 
-        userStorage.updateProfile(name, bio);
-
-        new XPopup.Builder(requireContext())
-                .dismissOnTouchOutside(false)
-                .setPopupCallback(new SimpleCallback() {
-                    @Override
-                    public void onDismiss(BasePopupView popupView) {
-                        Navigation.findNavController(v).navigateUp();
-                    }
-                })
-                .asLoading("保存成功")
-                .show()
-                .delayDismiss(800);
+        viewModel.updateProfile(email, name, bio);
     }
 
     private void showLogoutDialog(View v) {

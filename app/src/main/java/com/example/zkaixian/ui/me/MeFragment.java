@@ -1,5 +1,7 @@
 package com.example.zkaixian.ui.me;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ public class MeFragment extends Fragment {
 
     private FragmentMeBinding binding;
     private UserStorage userStorage;
+    private MeViewModel viewModel;
     private boolean isLogin = false;
 
     @Override
@@ -29,7 +32,10 @@ public class MeFragment extends Fragment {
     ) {
         binding = FragmentMeBinding.inflate(inflater, container, false);
         userStorage = new UserStorage(requireContext());
+        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(MeViewModel.class);
+        initObservers();
         initListener();
+        refreshUserState();
         return binding.getRoot();
     }
 
@@ -50,23 +56,37 @@ public class MeFragment extends Fragment {
             binding.meTvUserEmail.setText(userEmail);
             binding.meTvUserEmail.setVisibility(View.VISIBLE);
 
+            viewModel.fetchUserInfo(userEmail);
+
+            binding.meTvCourseCount.setText(String.valueOf(userStorage.getCourseCount()));
+            binding.meTvStudyTime.setText(userStorage.getStudyTime());
+            binding.meTvCertificateCount.setText(String.valueOf(userStorage.getCertificateCount()));
+
             String avatarUrl = "https://robohash.org/" + userName + ".png";
             Glide.with(this)
                     .load(avatarUrl)
                     .into(binding.meIvAvatar);
-
-            binding.meTvCourseCount.setText("12");
-            binding.meTvStudyTime.setText("45h");
-            binding.meTvCertificateCount.setText("3");
         } else {
             binding.meTvUserName.setText("请点击登录");
             binding.meTvUserEmail.setVisibility(View.GONE);
-            binding.meIvAvatar.setImageResource(android.R.drawable.sym_def_app_icon);
+            binding.meIvAvatar.setImageDrawable(new ColorDrawable(Color.parseColor("#CCCCCC")));
 
             binding.meTvCourseCount.setText("0");
             binding.meTvStudyTime.setText("0h");
             binding.meTvCertificateCount.setText("0");
         }
+    }
+
+    private void initObservers() {
+        viewModel.getUserInfoResult().observe(getViewLifecycleOwner(), user -> {
+            if (user != null) {
+                userStorage.saveUserStats(user.getCourse_count(), user.getStudy_time(), user.getCertificate_count());
+                
+                binding.meTvCourseCount.setText(String.valueOf(user.getCourse_count()));
+                binding.meTvStudyTime.setText(user.getStudy_time());
+                binding.meTvCertificateCount.setText(String.valueOf(user.getCertificate_count()));
+            }
+        });
     }
 
     private void initListener() {

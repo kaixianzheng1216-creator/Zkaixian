@@ -35,13 +35,13 @@ public class HomeViewModel extends ViewModel {
                 if (response.isSuccessful() && response.body() != null) {
                     adList.setValue(response.body());
                 } else {
-                    Log.e("HomeViewModel", "广告请求失败: " + response.code());
+                    Log.e("HomeViewModel", "请求广告列表失败: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<News>> call, @NonNull Throwable t) {
-                Log.e("HomeViewModel", "广告网络错误: " + t.getMessage());
+                Log.e("HomeViewModel", "请求广告列表失败: " + t.getMessage());
             }
         });
     }
@@ -53,13 +53,13 @@ public class HomeViewModel extends ViewModel {
                 if (response.isSuccessful() && response.body() != null) {
                     newsList.setValue(response.body());
                 } else {
-                    Log.e("HomeViewModel", "新闻请求失败: " + response.code());
+                    Log.e("HomeViewModel", "请求新闻列表失败: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<News>> call, @NonNull Throwable t) {
-                Log.e("HomeViewModel", "新闻网络错误: " + t.getMessage());
+                Log.e("HomeViewModel", "请求新闻列表失败: " + t.getMessage());
             }
         });
     }

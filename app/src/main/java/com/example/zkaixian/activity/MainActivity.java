@@ -17,13 +17,12 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.zkaixian.R;
 import com.example.zkaixian.databinding.ActivityMainBinding;
-import com.google.android.material.snackbar.Snackbar;
+import com.lxj.xpopup.XPopup;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private NavController navController;
-    private long lastBackPressTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,13 +107,11 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                long currentTime = System.currentTimeMillis();
-                if (currentTime - lastBackPressTime < 2000) {
-                    finish();
-                } else {
-                    lastBackPressTime = currentTime;
-                    Snackbar.make(binding.getRoot(), "再按一次退出程序", Snackbar.LENGTH_SHORT).show();
-                }
+                new XPopup.Builder(MainActivity.this)
+                        .asConfirm("提示", "确定要退出程序吗？",
+                                "取消", "确定",
+                                null, () -> finish(), false)
+                        .show();
             }
         });
     }

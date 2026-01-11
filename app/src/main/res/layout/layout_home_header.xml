@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -14,9 +15,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
+        android:paddingTop="8dp"
         android:paddingBottom="8dp">
 
         <LinearLayout
@@ -30,9 +33,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/baseline_personal_video_24" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/shape_circle_blue"
+                android:padding="12dp"
+                android:src="@drawable/baseline_personal_video_24"
+                app:tint="#FFFFFF" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,7 +46,7 @@
                 android:layout_marginTop="8dp"
                 android:text="全栈课程"
                 android:textColor="#333333"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,9 +60,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/baseline_code_24" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/shape_circle_green"
+                android:padding="12dp"
+                android:src="@drawable/baseline_code_24"
+                app:tint="#FFFFFF" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,7 +73,7 @@
                 android:layout_marginTop="8dp"
                 android:text="算法题库"
                 android:textColor="#333333"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,9 +87,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/baseline_bookmark_border_24" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/shape_circle_orange"
+                android:padding="12dp"
+                android:src="@drawable/baseline_bookmark_border_24"
+                app:tint="#FFFFFF" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,7 +100,7 @@
                 android:layout_marginTop="8dp"
                 android:text="技术专栏"
                 android:textColor="#333333"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,9 +114,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/baseline_work_outline_24" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/shape_circle_purple"
+                android:padding="12dp"
+                android:src="@drawable/baseline_work_outline_24"
+                app:tint="#FFFFFF" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -112,14 +127,18 @@
                 android:layout_marginTop="8dp"
                 android:text="开源项目"
                 android:textColor="#333333"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
-    <View
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="10dp"
-        android:background="#E0E0E0" />
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="推荐内容"
+        android:textColor="@color/blue_7"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 </LinearLayout>

@@ -9,6 +9,9 @@ public class UserStorage {
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_USER_EMAIL = "user_email";
     private static final String KEY_USER_BIO = "user_bio";
+    private static final String KEY_COURSE_COUNT = "course_count";
+    private static final String KEY_STUDY_TIME = "study_time";
+    private static final String KEY_CERTIFICATE_COUNT = "certificate_count";
 
     private final SharedPreferences sp;
 
@@ -39,6 +42,14 @@ public class UserStorage {
                 .apply();
     }
 
+    public void saveUserStats(int courseCount, String studyTime, int certificateCount) {
+        sp.edit()
+                .putInt(KEY_COURSE_COUNT, courseCount)
+                .putString(KEY_STUDY_TIME, studyTime)
+                .putInt(KEY_CERTIFICATE_COUNT, certificateCount)
+                .apply();
+    }
+
     public String getUserName() {
         return sp.getString(KEY_USER_NAME, "user");
     }
@@ -51,7 +62,19 @@ public class UserStorage {
         return sp.getString(KEY_USER_BIO, "user bio");
     }
 
+    public int getCourseCount() {
+        return sp.getInt(KEY_COURSE_COUNT, 0);
+    }
+
+    public String getStudyTime() {
+        return sp.getString(KEY_STUDY_TIME, "0h");
+    }
+
+    public int getCertificateCount() {
+        return sp.getInt(KEY_CERTIFICATE_COUNT, 0);
+    }
+
     public void logout() {
-        sp.edit().clear().apply(); // 或者只设为 false
+        sp.edit().clear().apply();
     }
 }

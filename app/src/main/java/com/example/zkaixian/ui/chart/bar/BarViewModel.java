@@ -16,20 +16,20 @@ public class BarViewModel extends ViewModel {
         List<Bar> list = new ArrayList<>();
 
         list.add(new Bar() {{
-            setName("产品A");
-            setValue(120);
+            setName("Java");
+            setValue(85);
         }});
         list.add(new Bar() {{
-            setName("产品B");
-            setValue(90);
+            setName("Kotlin");
+            setValue(92);
         }});
         list.add(new Bar() {{
-            setName("产品C");
-            setValue(60);
+            setName("Python");
+            setValue(76);
         }});
         list.add(new Bar() {{
-            setName("产品D");
-            setValue(150);
+            setName("C++");
+            setValue(65);
         }});
 
         data.setValue(list);

@@ -13,20 +13,53 @@ import androidx.navigation.Navigation;
 import com.example.zkaixian.R;
 import com.example.zkaixian.databinding.FragmentLoginBinding;
 import com.example.zkaixian.utils.UserStorage;
-import com.google.android.material.snackbar.Snackbar;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.interfaces.SimpleCallback;
 
 public class LoginFragment extends Fragment {
-
     private FragmentLoginBinding binding;
     private UserStorage userStorage;
+    private LoginViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         userStorage = new UserStorage(requireContext());
+        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(LoginViewModel.class);
 
+        initObservers();
         initListener();
         return binding.getRoot();
+    }
+
+    private void initObservers() {
+        viewModel.getLoginResult().observe(getViewLifecycleOwner(), user -> {
+            if (user != null) {
+                userStorage.saveUserInfo(user.getUsername(), user.getEmail());
+                new XPopup.Builder(requireContext())
+                        .dismissOnTouchOutside(false)
+                        .setPopupCallback(new SimpleCallback() {
+                            @Override
+                            public void onDismiss(BasePopupView popupView) {
+                                Navigation.findNavController(binding.getRoot()).navigateUp();
+                            }
+                        })
+                        .asLoading("登录成功")
+                        .show()
+                        .delayDismiss(800);
+            }
+        });
+
+        viewModel.getError().observe(getViewLifecycleOwner(), errorMsg -> {
+            if (binding != null) {
+                new XPopup.Builder(requireContext())
+                        .asConfirm("提示", errorMsg,
+                                null, "确定",
+                                null, null, true)
+                        .show();
+            }
+        });
     }
 
     private void initListener() {
@@ -48,21 +81,15 @@ public class LoginFragment extends Fragment {
         String password = binding.loginEtPasswordInput.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Snackbar.make(v, "请输入邮箱和密码", Snackbar.LENGTH_SHORT).show();
+            new XPopup.Builder(requireContext())
+                    .asConfirm("提示", "请输入邮箱和密码",
+                            null, "确定",
+                            null, null, true)
+                    .show();
             return;
         }
 
-        if (!"123@gmail.com".equals(email) || !"123456".equals(password)) {
-            Snackbar.make(v, "账号或密码错误", Snackbar.LENGTH_SHORT).show();
-            return;
-        }
-
-        String name = "用户 123";
-        userStorage.saveUserInfo(name, email);
-
-        Snackbar.make(v, "登录成功", Snackbar.LENGTH_SHORT).show();
-
-        Navigation.findNavController(v).navigateUp();
+        viewModel.login(email, password);
     }
 
     @Override

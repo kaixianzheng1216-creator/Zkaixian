@@ -26,6 +26,8 @@ public class BarFragment extends Fragment {
         BarViewModel barViewModel = new ViewModelProvider(this).get(BarViewModel.class);
         binding = FragmentBarBinding.inflate(inflater, container, false);
 
+        binding.getRoot().findViewById(com.example.zkaixian.R.id.iv_back).setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
+
         BarChart barChart = binding.barChart;
         ChartStyleUtils.initXYChartStyle(barChart);
 
@@ -40,7 +42,7 @@ public class BarFragment extends Fragment {
 
             barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabels));
 
-            BarDataSet barDataSet = new BarDataSet(entries, "产品销量对比");
+            BarDataSet barDataSet = new BarDataSet(entries, "编程语言热度");
             barDataSet.setValueTextSize(10f);
             barDataSet.setColors(ChartStyleUtils.COLORS);
 
