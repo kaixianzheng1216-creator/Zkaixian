@@ -2,38 +2,38 @@ package com.example.zkaixian.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.zkaixian.R;
 import com.example.zkaixian.databinding.ActivityMainBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
+
     private ActivityMainBinding binding;
     private NavController navController;
-    private AppBarConfiguration appBarConfiguration;
     private long lastBackPressTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        if (checkAndHandleFirstRun()) {
-            return;
-        }
+        if (checkAndHandleFirstRun()) return;
 
-        if (checkAndHandleAd()) {
-            return;
-        }
+        if (checkAndHandleAd()) return;
 
         initBinding();
 
@@ -42,14 +42,9 @@ public class MainActivity extends AppCompatActivity {
         initBackPressHandler();
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
-
     private boolean checkAndHandleFirstRun() {
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+
         boolean isFirstRun = prefs.getBoolean("isFirstRun", true);
 
         if (isFirstRun) {
@@ -80,16 +75,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initNavigation() {
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
 
-        appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home,
-                R.id.navigation_chart,
-                R.id.navigation_video,
-                R.id.navigation_me
-        ).build();
+        if (navHostFragment != null) {
+            navController = navHostFragment.getNavController();
+        }
 
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        int[][] states = new int[][]{
+                new int[]{android.R.attr.state_checked},
+                new int[]{}
+        };
+
+        int[] colors = new int[]{
+                Color.parseColor("#007AFF"),
+                Color.parseColor("#8E8E93")
+        };
+
+        ColorStateList colorStateList = new ColorStateList(states, colors);
+
+        binding.navView.setItemIconTintList(colorStateList);
+        binding.navView.setItemTextColor(colorStateList);
+        binding.navView.setItemActiveIndicatorEnabled(false);
 
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
@@ -98,20 +104,16 @@ public class MainActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                boolean back = navController.popBackStack();
-
-                if (back) {
+                if (navController != null && navController.navigateUp()) {
                     return;
                 }
 
                 long currentTime = System.currentTimeMillis();
-
                 if (currentTime - lastBackPressTime < 2000) {
                     finish();
                 } else {
                     lastBackPressTime = currentTime;
-
-                    Toast.makeText(MainActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "再按一次退出程序", Snackbar.LENGTH_SHORT).show();
                 }
             }
         });

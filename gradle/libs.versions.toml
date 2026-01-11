@@ -13,7 +13,6 @@ converterGson = "2.9.0"
 coreSplashscreen = "1.0.1"
 espressoCore = "3.5.1"
 glide = "4.16.0"
-gsyvideoplayer = "11.3.0"
 gsyvideoplayerVersion = "v8.6.0-release-jitpack"
 jacksonAnnotations = "2.15.2"
 jacksonDatabind = "2.15.2"
@@ -23,6 +22,7 @@ lifecycleLivedataKtx = "2.6.1"
 lifecycleViewmodelKtx = "2.6.1"
 lombok = "1.18.28"
 material = "1.10.0"
+materialVersion = "1.9.0"
 mpandroidchart = "v3.1.0"
 navigationFragment = "2.6.0"
 navigationUi = "2.6.0"
@@ -30,6 +30,7 @@ refreshLayoutKernel = "3.0.0-alpha"
 refreshHeaderClassics = "3.0.0-alpha"
 retrofit = "2.9.0"
 legacySupportV4 = "1.0.0"
+xpopup = "2.9.19"
 
 [libraries]
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -47,7 +48,6 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 github-gsyvideoplayer = { module = "com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer", version.ref = "gsyvideoplayerVersion" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
-gsyvideoplayer = { module = "com.shuyu:gsyvideoplayer", version.ref = "gsyvideoplayer" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jacksonDatabind" }
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jacksonAnnotations" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -55,6 +55,7 @@ lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-lived
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+material-v190 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
@@ -63,6 +64,7 @@ refresh-header-classics = { module = "io.github.scwang90:refresh-header-classics
 refresh-layout-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "refreshLayoutKernel" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
+xpopup = { module = "com.github.li-xiaojun:XPopup", version.ref = "xpopup" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

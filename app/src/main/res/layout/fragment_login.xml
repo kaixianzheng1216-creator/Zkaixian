@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <ImageView
+            android:id="@+id/login_iv_back"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="-12dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_chevron_left_24"
+            app:tint="#333333" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/login_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        android:text="欢迎回来\n请登录您的账户"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/login_tv_email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邮箱地址"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/login_et_email_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="name@example.com"
+            android:inputType="textEmailAddress"
+            android:textSize="17sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5EA" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/login_tv_password_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/login_et_password_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:textSize="17sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5EA" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/login_tv_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:text="忘记密码?"
+        android:textColor="@color/blue_7"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/login_btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/blue_7"
+        android:stateListAnimator="@null"
+        android:text="登 录"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/login_tv_register_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="还没有账号? " />
+
+        <TextView
+            android:id="@+id/login_tv_go_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="立即注册"
+            android:textColor="@color/blue_7"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

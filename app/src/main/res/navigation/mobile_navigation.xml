@@ -10,6 +10,7 @@
         android:name="com.example.zkaixian.ui.home.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
+
         <action
             android:id="@+id/action_navigation_home_to_courseFragment"
             app:destination="@id/navigation_course" />
@@ -30,6 +31,7 @@
         android:name="com.example.zkaixian.ui.web.WebFragment"
         android:label="详情"
         tools:layout="@layout/fragment_web">
+
         <argument
             android:name="target_url"
             android:defaultValue=""
@@ -40,33 +42,20 @@
         android:id="@+id/navigation_chart"
         android:name="com.example.zkaixian.ui.chart.ChartFragment"
         android:label="@string/chart"
-        tools:layout="@layout/fragment_chart" >
+        tools:layout="@layout/fragment_chart">
+
         <action
             android:id="@+id/action_navigation_chart_to_lineFragment"
             app:destination="@id/lineFragment" />
+
         <action
             android:id="@+id/action_navigation_chart_to_barFragment"
             app:destination="@id/barFragment" />
+
         <action
             android:id="@+id/action_navigation_chart_to_pieFragment"
             app:destination="@id/pieFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/navigation_video"
-        android:name="com.example.zkaixian.ui.video.VideoFragment"
-        android:label="@string/video"
-        tools:layout="@layout/fragment_video">
-        <action
-            android:id="@+id/action_navigation_video_to_videoDetailFragment"
-            app:destination="@id/videoDetailFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_me"
-        android:name="com.example.zkaixian.ui.me.MeFragment"
-        android:label="@string/me"
-        tools:layout="@layout/fragment_me" />
 
     <fragment
         android:id="@+id/lineFragment"
@@ -87,8 +76,77 @@
         tools:layout="@layout/fragment_pie" />
 
     <fragment
+        android:id="@+id/navigation_video"
+        android:name="com.example.zkaixian.ui.video.VideoFragment"
+        android:label="@string/video"
+        tools:layout="@layout/fragment_video">
+
+        <action
+            android:id="@+id/action_navigation_video_to_videoDetailFragment"
+            app:destination="@id/videoDetailFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/videoDetailFragment"
         android:name="com.example.zkaixian.ui.video.detail.VideoDetailFragment"
         android:label="视频详情"
         tools:layout="@layout/fragment_video_detail" />
+
+    <fragment
+        android:id="@+id/navigation_me"
+        android:name="com.example.zkaixian.ui.me.MeFragment"
+        android:label="@string/me"
+        tools:layout="@layout/fragment_me">
+
+        <action
+            android:id="@+id/action_navigation_me_to_loginFragment"
+            app:destination="@id/loginFragment" />
+
+        <action
+            android:id="@+id/action_navigation_me_to_accountProfileFragment"
+            app:destination="@id/accountProfileFragment" />
+
+        <action
+            android:id="@+id/action_navigation_me_to_securityPrivacyFragment"
+            app:destination="@id/securityPrivacyFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.zkaixian.ui.me.login.LoginFragment"
+        android:label="登录"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.zkaixian.ui.me.register.RegisterFragment"
+        android:label="注册"
+        tools:layout="@layout/fragment_register" />
+
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.zkaixian.ui.me.forget.ForgotPasswordFragment"
+        android:label="忘记密码"
+        tools:layout="@layout/fragment_forgot_password" />
+
+    <fragment
+        android:id="@+id/accountProfileFragment"
+        android:name="com.example.zkaixian.ui.me.profile.AccountProfileFragment"
+        android:label="账号资料"
+        tools:layout="@layout/fragment_account_profile" />
+
+    <fragment
+        android:id="@+id/securityPrivacyFragment"
+        android:name="com.example.zkaixian.ui.me.security.SecurityPrivacyFragment"
+        android:label="安全隐私"
+        tools:layout="@layout/fragment_security_privacy" />
 </navigation>

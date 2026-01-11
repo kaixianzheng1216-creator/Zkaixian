@@ -63,4 +63,6 @@ dependencies {
     implementation libs.boommenu
     implementation libs.mpandroidchart
     implementation libs.github.gsyvideoplayer
+    implementation libs.material.v190
+    implementation libs.xpopup
 }
