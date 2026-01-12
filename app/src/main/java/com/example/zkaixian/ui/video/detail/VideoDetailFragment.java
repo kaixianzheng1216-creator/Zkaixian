@@ -62,7 +62,7 @@ public class VideoDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentVideoDetailBinding.inflate(inflater, container, false);
-        detailPlayer = binding.detailPlayer;
+        detailPlayer = binding.videoDetailPlayer;
         orientationUtils = new OrientationUtils(getActivity(), detailPlayer);
         orientationUtils.setEnable(false);
 
@@ -74,12 +74,12 @@ public class VideoDetailFragment extends Fragment {
     }
 
     private void initViews() {
-        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        binding.videoDetailTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 boolean isIntro = tab.getPosition() == 0;
-                binding.scrollIntro.setVisibility(isIntro ? View.VISIBLE : View.GONE);
-                binding.rvEpisodes.setVisibility(isIntro ? View.GONE : View.VISIBLE);
+                binding.videoDetailScrollIntro.setVisibility(isIntro ? View.VISIBLE : View.GONE);
+                binding.videoDetailRvEpisodes.setVisibility(isIntro ? View.GONE : View.VISIBLE);
             }
 
             @Override
@@ -101,7 +101,7 @@ public class VideoDetailFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        binding.rvEpisodes.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.videoDetailRvEpisodes.setLayoutManager(new LinearLayoutManager(getContext()));
         episodeAdapter = new EpisodeAdapter(new ArrayList<>());
         episodeAdapter.setEmptyView(R.layout.layout_empty_view);
 
@@ -112,7 +112,7 @@ public class VideoDetailFragment extends Fragment {
             }
         });
 
-        binding.rvEpisodes.setAdapter(episodeAdapter);
+        binding.videoDetailRvEpisodes.setAdapter(episodeAdapter);
     }
 
     private void playVideo(String url, String title) {
@@ -172,8 +172,8 @@ public class VideoDetailFragment extends Fragment {
             Video video = (Video) arguments.getSerializable("video_data");
 
             if (video != null) {
-                binding.tvDetailName.setText(video.getName());
-                binding.tvDetailIntro.setText(video.getIntro());
+                binding.videoDetailTvName.setText(video.getName());
+                binding.videoDetailTvIntro.setText(video.getIntro());
                 mCoverUrl = RetrofitClient.BASE_URL + video.getImg();
 
                 if (video.getVideoDetailList() != null && !video.getVideoDetailList().isEmpty()) {

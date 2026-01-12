@@ -29,9 +29,9 @@ public class PieFragment extends Fragment {
         PieViewModel pieViewModel = new ViewModelProvider(this).get(PieViewModel.class);
         binding = FragmentPieBinding.inflate(inflater, container, false);
         
-        binding.ivBack.setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
+        binding.pieFragmentIvBack.setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
 
-        PieChart pieChart = binding.pieChart;
+        PieChart pieChart = binding.pieFragmentChartPie;
         initPieSpecificStyle(pieChart);
 
         pieViewModel.getData().observe(getViewLifecycleOwner(), data -> {

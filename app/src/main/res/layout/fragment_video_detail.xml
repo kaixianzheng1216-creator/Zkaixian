@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -7,12 +6,12 @@
     android:orientation="vertical">
 
     <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
-        android:id="@+id/detail_player"
+        android:id="@+id/video_detail_player"
         android:layout_width="match_parent"
         android:layout_height="220dp" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+        android:id="@+id/video_detail_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="#FFFFFF"
@@ -46,7 +45,7 @@
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/scroll_intro"
+            android:id="@+id/video_detail_scroll_intro"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
@@ -58,7 +57,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_detail_name"
+                    android:id="@+id/video_detail_tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
@@ -68,7 +67,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_detail_intro"
+                    android:id="@+id/video_detail_tv_intro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="6dp"
@@ -79,7 +78,7 @@
         </androidx.core.widget.NestedScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_episodes"
+            android:id="@+id/video_detail_rv_episodes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"

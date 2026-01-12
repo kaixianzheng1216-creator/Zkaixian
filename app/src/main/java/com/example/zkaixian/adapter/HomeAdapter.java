@@ -24,21 +24,24 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<News, BaseViewHolder>
 
     @Override
     protected void convert(@NotNull BaseViewHolder helper, News item) {
-        helper.setText(R.id.tv_news_title, item.getNewsName());
-        helper.setText(R.id.tv_news_type, item.getNewsTypeName());
-
         switch (helper.getItemViewType()) {
             case 1:
-                loadImage(helper, R.id.iv_img_1, item.getImg1());
+                helper.setText(R.id.item_news_single_img_tv_title, item.getNewsName());
+                helper.setText(R.id.item_news_single_img_tv_type, item.getNewsTypeName());
+                loadImage(helper, R.id.item_news_single_img_iv_1, item.getImg1());
                 break;
             case 2:
-                loadImage(helper, R.id.iv_img_1, item.getImg1());
-                loadImage(helper, R.id.iv_img_2, item.getImg2());
+                helper.setText(R.id.item_news_double_img_tv_title, item.getNewsName());
+                helper.setText(R.id.item_news_double_img_tv_type, item.getNewsTypeName());
+                loadImage(helper, R.id.item_news_double_img_iv_1, item.getImg1());
+                loadImage(helper, R.id.item_news_double_img_iv_2, item.getImg2());
                 break;
             case 3:
-                loadImage(helper, R.id.iv_img_1, item.getImg1());
-                loadImage(helper, R.id.iv_img_2, item.getImg2());
-                loadImage(helper, R.id.iv_img_3, item.getImg3());
+                helper.setText(R.id.item_news_triple_img_tv_title, item.getNewsName());
+                helper.setText(R.id.item_news_triple_img_tv_type, item.getNewsTypeName());
+                loadImage(helper, R.id.item_news_triple_img_iv_1, item.getImg1());
+                loadImage(helper, R.id.item_news_triple_img_iv_2, item.getImg2());
+                loadImage(helper, R.id.item_news_triple_img_iv_3, item.getImg3());
                 break;
             default:
                 break;

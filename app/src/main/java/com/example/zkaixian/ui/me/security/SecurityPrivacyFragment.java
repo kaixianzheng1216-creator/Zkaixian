@@ -72,17 +72,17 @@ public class SecurityPrivacyFragment extends Fragment {
     }
 
     private void initView() {
-        binding.securityPrivacyTvCurrentEmailDisplay.setText(userStorage.getEmail());
+        binding.securityPrivacyFragmentTvCurrentEmailDisplay.setText(userStorage.getEmail());
     }
 
     private void initListener() {
-        binding.securityPrivacyIvBackAction.setOnClickListener(v ->
+        binding.securityPrivacyFragmentIvBackAction.setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp()
         );
 
-        binding.securityPrivacyTvSendCodeAction.setOnClickListener(v -> sendVerifyCode());
+        binding.securityPrivacyFragmentTvSendCodeAction.setOnClickListener(v -> sendVerifyCode());
 
-        binding.securityPrivacyBtnSavePasswordAction.setOnClickListener(this::updatePassword);
+        binding.securityPrivacyFragmentBtnSavePasswordAction.setOnClickListener(this::updatePassword);
     }
 
     private void sendVerifyCode() {
@@ -99,8 +99,8 @@ public class SecurityPrivacyFragment extends Fragment {
     }
 
     private void updatePassword(View v) {
-        String code = binding.securityPrivacyEtVerifyCodeInput.getText().toString().trim();
-        String password = binding.securityPrivacyEtNewPasswordInput.getText().toString().trim();
+        String code = binding.securityPrivacyFragmentEtVerifyCodeInput.getText().toString().trim();
+        String password = binding.securityPrivacyFragmentEtNewPasswordInput.getText().toString().trim();
         String email = userStorage.getEmail();
 
         if (TextUtils.isEmpty(code) || TextUtils.isEmpty(password)) {

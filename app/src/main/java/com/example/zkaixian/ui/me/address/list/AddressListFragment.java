@@ -46,19 +46,19 @@ public class AddressListFragment extends Fragment {
     }
 
     private void initView() {
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.addressListFragmentRvList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         adapter = new AddressAdapter(new ArrayList<>());
 
         adapter.setEmptyView(R.layout.layout_empty_view);
 
-        binding.recyclerView.setAdapter(adapter);
+        binding.addressListFragmentRvList.setAdapter(adapter);
     }
 
     private void initListener() {
-        binding.ivBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
+        binding.addressListFragmentIvBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        binding.btnAddAddress.setOnClickListener(v -> {
+        binding.addressListFragmentBtnAdd.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_addressListFragment_to_addressAddFragment);
         });
 

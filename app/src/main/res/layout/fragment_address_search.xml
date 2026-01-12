@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp">
 
         <ImageView
-            android:id="@+id/iv_back"
+            android:id="@+id/address_search_fragment_iv_back"
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
@@ -25,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="搜索地址"
+            android:textColor="#333333"
             android:textSize="17sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -35,35 +35,47 @@
         android:background="#F5F5F5" />
 
     <EditText
-        android:id="@+id/et_search"
+        android:id="@+id/address_search_fragment_et_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="请输入地址关键词"
-        android:padding="12dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/shape_edit_text_bg"
-        android:drawableEnd="@drawable/baseline_search_24"/>
+        android:drawableEnd="@drawable/baseline_search_24"
+        android:hint="请输入地址关键词"
+        android:minHeight="50dp"
+        android:padding="12dp"
+        android:textColor="#333333"
+        android:textSize="16sp" />
 
     <com.amap.api.maps.MapView
-        android:id="@+id/map_view"
+        android:id="@+id/address_search_fragment_map_view"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="12dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/address_search_fragment_rv_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-    
-    <Button
-        android:id="@+id/btn_confirm"
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/address_search_fragment_btn_confirm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="16dp"
         android:backgroundTint="@color/blue_7"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"
         android:text="确认选择"
         android:textColor="#FFFFFF"
-        android:visibility="gone"/>
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:cornerRadius="8dp" />
+
 </LinearLayout>

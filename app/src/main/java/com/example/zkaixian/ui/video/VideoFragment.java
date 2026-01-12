@@ -40,7 +40,7 @@ public class VideoFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.videoFragmentRvList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         videoAdapter = new VideoAdapter(new ArrayList<>());
         videoAdapter.setEmptyView(R.layout.layout_empty_view);
@@ -56,7 +56,7 @@ public class VideoFragment extends Fragment {
             }
         });
 
-        binding.recyclerView.setAdapter(videoAdapter);
+        binding.videoFragmentRvList.setAdapter(videoAdapter);
     }
 
     private void observeViewModel() {

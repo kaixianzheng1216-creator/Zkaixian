@@ -16,8 +16,8 @@ public class CourseAdapter extends BaseQuickAdapter<Course, BaseViewHolder> {
 
     @Override
     protected void convert(@NotNull BaseViewHolder helper, @NotNull Course item) {
-        helper.setText(R.id.tv_content, item.getContent());
-        helper.setText(R.id.tv_address, item.getAddress());
-        helper.setText(R.id.tv_open_class, item.getOpenClass());
+        helper.setText(R.id.item_course_tv_content, item.getContent());
+        helper.setText(R.id.item_course_tv_address, item.getAddress());
+        helper.setText(R.id.item_course_tv_open_class, item.getOpenClass());
     }
 }

@@ -63,9 +63,9 @@ public class LoginFragment extends Fragment {
     }
 
     private void initListener() {
-        binding.loginIvBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
+        binding.loginFragmentIvBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        binding.loginTvGoRegister.setOnClickListener(v ->
+        binding.loginFragmentTvGoRegister.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registerFragment)
         );
 
@@ -77,8 +77,8 @@ public class LoginFragment extends Fragment {
     }
 
     private void handleLogin(View v) {
-        String email = binding.loginEtEmailInput.getText().toString().trim();
-        String password = binding.loginEtPasswordInput.getText().toString().trim();
+        String email = binding.loginFragmentEtEmail.getText().toString().trim();
+        String password = binding.loginFragmentEtPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             new XPopup.Builder(requireContext())

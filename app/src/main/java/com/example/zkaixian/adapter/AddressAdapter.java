@@ -18,8 +18,8 @@ public class AddressAdapter extends BaseQuickAdapter<Address, BaseViewHolder> {
 
     @Override
     protected void convert(@NotNull BaseViewHolder helper, @NotNull Address item) {
-        helper.setText(R.id.tv_name, item.getName());
-        helper.setText(R.id.tv_phone, item.getPhone());
-        helper.setText(R.id.tv_address, item.getAddress() + " " + item.getDetail());
+        helper.setText(R.id.item_address_tv_name, item.getName());
+        helper.setText(R.id.item_address_tv_phone, item.getPhone());
+        helper.setText(R.id.item_address_tv_address, item.getAddress() + " " + item.getDetail());
     }
 }

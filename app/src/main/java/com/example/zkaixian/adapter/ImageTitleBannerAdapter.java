@@ -46,8 +46,8 @@ public class ImageTitleBannerAdapter extends BannerAdapter<News, ImageTitleBanne
 
         public BannerViewHolder(@NonNull View view) {
             super(view);
-            imageView = view.findViewById(R.id.banner_image);
-            titleView = view.findViewById(R.id.banner_title);
+            imageView = view.findViewById(R.id.banner_iv_image);
+            titleView = view.findViewById(R.id.banner_tv_title);
         }
     }
 }

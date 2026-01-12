@@ -3,13 +3,13 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/iv_ad"
+        android:id="@+id/ad_activity_iv_ad"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
     <Button
-        android:id="@+id/btn_skip"
+        android:id="@+id/ad_activity_btn_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"

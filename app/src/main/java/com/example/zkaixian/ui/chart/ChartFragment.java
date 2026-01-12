@@ -26,7 +26,7 @@ public class ChartFragment extends Fragment {
 
         View root = binding.getRoot();
 
-        BoomMenuButton bmb = root.findViewById(R.id.bmb);
+        BoomMenuButton bmb = root.findViewById(R.id.chart_fragment_bmb);
         bmb.setNormalColor(Color.parseColor("#666666"));
         bmb.setHighlightedColor(Color.parseColor("#666666"));
 

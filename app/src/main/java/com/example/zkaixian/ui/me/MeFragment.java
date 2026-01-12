@@ -52,28 +52,28 @@ public class MeFragment extends Fragment {
             String userName = userStorage.getUserName();
             String userEmail = userStorage.getEmail();
 
-            binding.meTvUserName.setText(userName);
-            binding.meTvUserEmail.setText(userEmail);
-            binding.meTvUserEmail.setVisibility(View.VISIBLE);
+            binding.meFragmentTvUserName.setText(userName);
+            binding.meFragmentTvUserEmail.setText(userEmail);
+            binding.meFragmentTvUserEmail.setVisibility(View.VISIBLE);
 
             viewModel.fetchUserInfo(userEmail);
 
-            binding.meTvCourseCount.setText(String.valueOf(userStorage.getCourseCount()));
-            binding.meTvStudyTime.setText(userStorage.getStudyTime());
-            binding.meTvCertificateCount.setText(String.valueOf(userStorage.getCertificateCount()));
+            binding.meFragmentTvCourseCount.setText(String.valueOf(userStorage.getCourseCount()));
+            binding.meFragmentTvStudyTime.setText(userStorage.getStudyTime());
+            binding.meFragmentTvCertificateCount.setText(String.valueOf(userStorage.getCertificateCount()));
 
             String avatarUrl = "https://robohash.org/" + userName + ".png";
             Glide.with(this)
                     .load(avatarUrl)
-                    .into(binding.meIvAvatar);
+                    .into(binding.meFragmentIvAvatar);
         } else {
-            binding.meTvUserName.setText("请点击登录");
-            binding.meTvUserEmail.setVisibility(View.GONE);
-            binding.meIvAvatar.setImageDrawable(new ColorDrawable(Color.parseColor("#CCCCCC")));
+            binding.meFragmentTvUserName.setText("请点击登录");
+            binding.meFragmentTvUserEmail.setVisibility(View.GONE);
+            binding.meFragmentIvAvatar.setImageDrawable(new ColorDrawable(Color.parseColor("#CCCCCC")));
 
-            binding.meTvCourseCount.setText("0");
-            binding.meTvStudyTime.setText("0h");
-            binding.meTvCertificateCount.setText("0");
+            binding.meFragmentTvCourseCount.setText("0");
+            binding.meFragmentTvStudyTime.setText("0h");
+            binding.meFragmentTvCertificateCount.setText("0");
         }
     }
 
@@ -82,15 +82,15 @@ public class MeFragment extends Fragment {
             if (user != null) {
                 userStorage.saveUserStats(user.getCourse_count(), user.getStudy_time(), user.getCertificate_count());
                 
-                binding.meTvCourseCount.setText(String.valueOf(user.getCourse_count()));
-                binding.meTvStudyTime.setText(user.getStudy_time());
-                binding.meTvCertificateCount.setText(String.valueOf(user.getCertificate_count()));
+                binding.meFragmentTvCourseCount.setText(String.valueOf(user.getCourse_count()));
+                binding.meFragmentTvStudyTime.setText(user.getStudy_time());
+                binding.meFragmentTvCertificateCount.setText(String.valueOf(user.getCertificate_count()));
             }
         });
     }
 
     private void initListener() {
-        binding.meClUserProfile.setOnClickListener(v -> {
+        binding.meFragmentClUserProfile.setOnClickListener(v -> {
             if (!isLogin) {
                 Navigation.findNavController(v)
                         .navigate(R.id.action_navigation_me_to_loginFragment);
@@ -100,34 +100,34 @@ public class MeFragment extends Fragment {
             }
         });
 
-        binding.meLlAccountProfile.setOnClickListener(v -> {
+        binding.meFragmentLlAccountProfile.setOnClickListener(v -> {
             if (checkLogin(v)) {
                 Navigation.findNavController(v)
                         .navigate(R.id.action_navigation_me_to_accountProfileFragment);
             }
         });
 
-        binding.meLlSecurityPrivacy.setOnClickListener(v -> {
+        binding.meFragmentLlSecurityPrivacy.setOnClickListener(v -> {
             if (checkLogin(v)) {
                 Navigation.findNavController(v)
                         .navigate(R.id.action_navigation_me_to_securityPrivacyFragment);
             }
         });
 
-        binding.meLlShippingAddress.setOnClickListener(v -> {
+        binding.meFragmentLlShippingAddress.setOnClickListener(v -> {
             if (checkLogin(v)) {
                 Navigation.findNavController(v)
                         .navigate(R.id.action_navigation_me_to_addressListFragment);
             }
         });
 
-        binding.meLlFavorite.setOnClickListener(v -> {
+        binding.meFragmentLlFavorite.setOnClickListener(v -> {
             if (checkLogin(v)) {
                 showDevPopup();
             }
         });
 
-        binding.meLlHistory.setOnClickListener(v -> {
+        binding.meFragmentLlHistory.setOnClickListener(v -> {
             if (checkLogin(v)) {
                 showDevPopup();
             }

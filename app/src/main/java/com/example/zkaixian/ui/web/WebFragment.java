@@ -26,9 +26,9 @@ public class WebFragment extends Fragment {
         mAgentWeb = AgentWeb.with(this)
                 .setAgentWebParent(
                         root,
-                        new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT
+                        new ViewGroup.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT
                         )
                 )
                 .useDefaultIndicator()

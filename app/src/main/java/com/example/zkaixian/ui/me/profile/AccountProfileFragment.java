@@ -71,27 +71,27 @@ public class AccountProfileFragment extends Fragment {
         String email = userStorage.getEmail();
         String bio = userStorage.getBio();
 
-        binding.accountProfileEtNicknameInput.setText(name);
+        binding.accountProfileFragmentEtNickname.setText(name);
         binding.accountProfileTvEmailDisplay.setText(email);
         binding.accountProfileEtBioInput.setText(bio);
 
         String avatarUrl = "https://robohash.org/" + name + ".png";
 
-        Glide.with(this).load(avatarUrl).into(binding.accountProfileIvAvatar);
+        Glide.with(this).load(avatarUrl).into(binding.accountProfileFragmentIvAvatar);
     }
 
     private void initListener() {
-        binding.accountProfileIvBackAction.setOnClickListener(v ->
+        binding.accountProfileFragmentIvBack.setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp()
         );
 
-        binding.accountProfileBtnSaveAction.setOnClickListener(this::saveProfile);
+        binding.accountProfileFragmentBtnSave.setOnClickListener(this::saveProfile);
 
-        binding.accountProfileBtnLogout.setOnClickListener(this::showLogoutDialog);
+        binding.accountProfileFragmentBtnLogout.setOnClickListener(this::showLogoutDialog);
     }
 
     private void saveProfile(View v) {
-        String name = binding.accountProfileEtNicknameInput.getText().toString().trim();
+        String name = binding.accountProfileFragmentEtNickname.getText().toString().trim();
         String bio = binding.accountProfileEtBioInput.getText().toString().trim();
         String email = userStorage.getEmail();
 

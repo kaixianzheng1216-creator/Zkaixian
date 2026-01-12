@@ -56,13 +56,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.homeFragmentRvNews.setLayoutManager(new LinearLayoutManager(getContext()));
 
         initAdapter();
 
         addHeaderView();
 
-        binding.recyclerView.setAdapter(homeAdapter);
+        binding.homeFragmentRvNews.setAdapter(homeAdapter);
     }
 
     private void initAdapter() {
@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void addHeaderView() {
-        View headerView = getLayoutInflater().inflate(R.layout.layout_home_header, binding.recyclerView, false);
+        View headerView = getLayoutInflater().inflate(R.layout.layout_home_header, binding.homeFragmentRvNews, false);
 
         initHeaderBanner(headerView);
         initHeaderMenu(headerView);
@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initHeaderBanner(View headerView) {
-        banner = headerView.findViewById(R.id.banner);
+        banner = headerView.findViewById(R.id.layout_home_header_banner);
 
         List<Integer> defaultImages = Collections.singletonList(R.drawable.banner_default);
 
@@ -101,13 +101,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void initHeaderMenu(View headerView) {
-        headerView.findViewById(R.id.ll_menu_course).setOnClickListener(v -> {
+        headerView.findViewById(R.id.layout_home_header_ll_menu_course).setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment);
         });
     }
 
     private void initRefreshLayout() {
-        RefreshLayout refreshLayout = binding.refreshLayout;
+        RefreshLayout refreshLayout = binding.homeFragmentRefreshLayout;
 
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));

@@ -26,9 +26,9 @@ public class LineFragment extends Fragment {
         LineViewModel lineViewModel = new ViewModelProvider(this).get(LineViewModel.class);
         binding = FragmentLineBinding.inflate(inflater, container, false);
         
-        binding.ivBack.setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
+        binding.lineFragmentIvBack.setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
 
-        LineChart lineChart = binding.lineChart;
+        LineChart lineChart = binding.lineFragmentChartLine;
         ChartStyleUtils.initXYChartStyle(lineChart);
 
         lineViewModel.getData().observe(getViewLifecycleOwner(), data -> {

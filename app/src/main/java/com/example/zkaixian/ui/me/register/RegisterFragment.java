@@ -71,17 +71,17 @@ public class RegisterFragment extends Fragment {
     }
 
     private void initListener() {
-        binding.registerIvBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
+        binding.registerFragmentIvBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        binding.registerTvGoLogin.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
+        binding.registerFragmentTvGoLogin.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        binding.registerTvGetCode.setOnClickListener(v -> sendVerifyCode());
+        binding.registerFragmentTvGetCode.setOnClickListener(v -> sendVerifyCode());
 
-        binding.registerBtnSubmit.setOnClickListener(this::handleRegister);
+        binding.registerFragmentBtnSubmit.setOnClickListener(this::handleRegister);
     }
 
     private void sendVerifyCode() {
-        String email = binding.registerEtEmailInput.getText().toString().trim();
+        String email = binding.registerFragmentEtEmailInput.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
             new XPopup.Builder(requireContext())
@@ -96,10 +96,10 @@ public class RegisterFragment extends Fragment {
     }
 
     private void handleRegister(View v) {
-        String name = binding.registerEtNicknameInput.getText().toString().trim();
-        String email = binding.registerEtEmailInput.getText().toString().trim();
-        String code = binding.registerEtCodeInput.getText().toString().trim();
-        String password = binding.registerEtPasswordInput.getText().toString().trim();
+        String name = binding.registerFragmentEtNicknameInput.getText().toString().trim();
+        String email = binding.registerFragmentEtEmailInput.getText().toString().trim();
+        String code = binding.registerFragmentEtCodeInput.getText().toString().trim();
+        String password = binding.registerFragmentEtPasswordInput.getText().toString().trim();
 
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(code)) {
             new XPopup.Builder(requireContext())

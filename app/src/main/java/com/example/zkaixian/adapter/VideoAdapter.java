@@ -20,10 +20,10 @@ public class VideoAdapter extends BaseQuickAdapter<Video, BaseViewHolder> {
 
     @Override
     protected void convert(@NotNull BaseViewHolder helper, @NotNull Video item) {
-        helper.setText(R.id.tv_name, item.getName());
-        helper.setText(R.id.tv_intro, item.getIntro());
+        helper.setText(R.id.item_video_tv_name, item.getName());
+        helper.setText(R.id.item_video_tv_intro, item.getIntro());
 
-        ImageView ivImg = helper.getView(R.id.iv_img);
+        ImageView ivImg = helper.getView(R.id.item_video_iv_img);
 
         String baseUrl = RetrofitClient.BASE_URL;
 

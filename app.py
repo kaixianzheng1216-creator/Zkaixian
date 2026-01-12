@@ -1,9 +1,12 @@
-import random
 import datetime
-from flask import Flask, request, jsonify, redirect
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
+import random
+
+from flask import Flask, request, jsonify, send_from_directory
 from flask_mail import Mail, Message
+from flask_sqlalchemy import SQLAlchemy
+from waitress import serve
+from werkzeug.security import generate_password_hash, check_password_hash
+from paste.translogger import TransLogger
 
 app = Flask(__name__)
 
@@ -12,6 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp.qq.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USERNAME'] = '2722940234@qq.com'
 app.config['MAIL_PASSWORD'] = 'rzcbslafadbidehf'
 app.config['MAIL_DEFAULT_SENDER'] = app.config['MAIL_USERNAME']
@@ -19,14 +23,13 @@ app.config['MAIL_DEFAULT_SENDER'] = app.config['MAIL_USERNAME']
 db = SQLAlchemy(app)
 mail = Mail(app)
 
-
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
-    username = db.Column(db.String(80), default="新用户")
-    bio = db.Column(db.String(255), default="这个人很懒，什么都没写")
+    username = db.Column(db.String(80))
+    bio = db.Column(db.String(255))
 
     def to_dict(self):
         return {
@@ -94,6 +97,7 @@ def send_code():
 @app.route('/api/register', methods=['POST'])
 def register():
     data = request.json
+
     email = data.get('email')
     password = data.get('password')
     username = data.get('username')
@@ -287,8 +291,34 @@ def delete_address(address_id):
     return jsonify({"code": 200, "msg": "删除成功"})
 
 
+@app.route('/api/home_ad_list_data.json')
+def home_ad_list_data():
+    return send_from_directory('data', 'home_ad_list_data.json')
+
+
+@app.route('/api/home_news_list_data.json')
+def home_news_list_data():
+    return send_from_directory('data', 'home_news_list_data.json')
+
+
+@app.route('/api/python_list_data.json')
+def python_list_data():
+    return send_from_directory('data', 'python_list_data.json')
+
+
+@app.route('/api/video_list_data.json')
+def video_list_data():
+    return send_from_directory('data', 'video_list_data.json')
+
+
+@app.route('/api/img/<path:filename>')
+def serve_images(filename):
+    return send_from_directory('data/img', filename)
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
 
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    logged_app = TransLogger(app, setup_console_handler=True)
+
+    serve(logged_app, host='0.0.0.0', port=5000, threads=10)

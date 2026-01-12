@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initNavigation() {
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_activity_fragment_nav_host);
 
         if (navHostFragment != null) {
             navController = navHostFragment.getNavController();
@@ -95,11 +95,11 @@ public class MainActivity extends AppCompatActivity {
 
         ColorStateList colorStateList = new ColorStateList(states, colors);
 
-        binding.navView.setItemIconTintList(colorStateList);
-        binding.navView.setItemTextColor(colorStateList);
-        binding.navView.setItemActiveIndicatorEnabled(false);
+        binding.mainActivityNavView.setItemIconTintList(colorStateList);
+        binding.mainActivityNavView.setItemTextColor(colorStateList);
+        binding.mainActivityNavView.setItemActiveIndicatorEnabled(false);
 
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupWithNavController(binding.mainActivityNavView, navController);
     }
 
     private void initBackPressHandler() {

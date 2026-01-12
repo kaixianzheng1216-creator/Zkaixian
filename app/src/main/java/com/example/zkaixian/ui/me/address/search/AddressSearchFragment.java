@@ -33,7 +33,7 @@ public class AddressSearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAddressSearchBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(this).get(AddressSearchViewModel.class);
-        binding.mapView.onCreate(savedInstanceState);
+        binding.addressSearchFragmentMapView.onCreate(savedInstanceState);
 
         initView();
         initListener();
@@ -47,7 +47,7 @@ public class AddressSearchFragment extends Fragment {
         super.onResume();
 
         if (binding != null) {
-            binding.mapView.onResume();
+            binding.addressSearchFragmentMapView.onResume();
         }
     }
 
@@ -56,14 +56,14 @@ public class AddressSearchFragment extends Fragment {
         super.onPause();
 
         if (binding != null) {
-            binding.mapView.onPause();
+            binding.addressSearchFragmentMapView.onPause();
         }
     }
 
     @Override
     public void onDestroyView() {
         if (binding != null) {
-            binding.mapView.onDestroy();
+            binding.addressSearchFragmentMapView.onDestroy();
         }
 
         super.onDestroyView();
@@ -76,26 +76,26 @@ public class AddressSearchFragment extends Fragment {
         super.onSaveInstanceState(outState);
 
         if (binding != null) {
-            binding.mapView.onSaveInstanceState(outState);
+            binding.addressSearchFragmentMapView.onSaveInstanceState(outState);
         }
     }
 
     private void initView() {
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.addressSearchFragmentRvList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         adapter = new AmapTipAdapter(new ArrayList<>());
 
-        binding.recyclerView.setAdapter(adapter);
+        binding.addressSearchFragmentRvList.setAdapter(adapter);
 
-        binding.etSearch.requestFocus();
+        binding.addressSearchFragmentEtSearch.requestFocus();
     }
 
     private void initListener() {
-        binding.ivBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
+        binding.addressSearchFragmentIvBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        binding.etSearch.setOnEditorActionListener((v, actionId, event) -> {
+        binding.addressSearchFragmentEtSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                performSearch(binding.etSearch.getText().toString());
+                performSearch(binding.addressSearchFragmentEtSearch.getText().toString());
 
                 hideKeyboard();
 
@@ -105,7 +105,7 @@ public class AddressSearchFragment extends Fragment {
             return false;
         });
 
-        binding.etSearch.addTextChangedListener(new TextWatcher() {
+        binding.addressSearchFragmentEtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -164,7 +164,7 @@ public class AddressSearchFragment extends Fragment {
         if (getContext() != null && binding != null) {
             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-            imm.hideSoftInputFromWindow(binding.etSearch.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(binding.addressSearchFragmentEtSearch.getWindowToken(), 0);
         }
     }
 }

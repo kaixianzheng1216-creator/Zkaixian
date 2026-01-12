@@ -71,15 +71,15 @@ public class ForgotPasswordFragment extends Fragment {
     }
 
     private void initListener() {
-        binding.forgotIvBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
+        binding.forgotPasswordFragmentIvBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        binding.forgotTvGetCode.setOnClickListener(v -> sendVerifyCode());
+        binding.forgotPasswordFragmentTvGetCode.setOnClickListener(v -> sendVerifyCode());
 
-        binding.forgotBtnResetPassword.setOnClickListener(this::resetPassword);
+        binding.forgotPasswordFragmentBtnResetPassword.setOnClickListener(this::resetPassword);
     }
 
     private void sendVerifyCode() {
-        String email = binding.forgotEtEmailInput.getText().toString().trim();
+        String email = binding.forgotPasswordFragmentEtEmail.getText().toString().trim();
         if (TextUtils.isEmpty(email)) {
             new XPopup.Builder(requireContext())
                     .asConfirm("提示", "请先输入邮箱",
@@ -92,8 +92,8 @@ public class ForgotPasswordFragment extends Fragment {
     }
 
     private void resetPassword(View v) {
-        String email = binding.forgotEtEmailInput.getText().toString().trim();
-        String code = binding.forgotEtCodeInput.getText().toString().trim();
+        String email = binding.forgotPasswordFragmentEtEmail.getText().toString().trim();
+        String code = binding.forgotPasswordFragmentEtCode.getText().toString().trim();
         String newPassword = binding.forgotEtNewPasswordInput.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(code) || TextUtils.isEmpty(newPassword)) {

@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp">
 
         <ImageView
-            android:id="@+id/iv_back"
+            android:id="@+id/address_add_fragment_iv_back"
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
@@ -21,11 +20,12 @@
             app:tint="#333333" />
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/address_add_fragment_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="新建收货地址"
+            android:textColor="#333333"
             android:textSize="17sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -35,55 +35,153 @@
         android:layout_height="1dp"
         android:background="#F5F5F5" />
 
-    <EditText
-        android:id="@+id/et_name"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="收货人"
-        android:inputType="textPersonName"
-        android:padding="12dp"
-        android:background="@drawable/shape_edit_text_bg"/>
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <EditText
-        android:id="@+id/et_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:hint="手机号码"
-        android:inputType="phone"
-        android:padding="12dp"
-        android:background="@drawable/shape_edit_text_bg"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="40dp">
 
-    <EditText
-        android:id="@+id/et_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="所在地址"
-        android:focusable="false"
-        android:padding="12dp"
-        android:background="@drawable/shape_edit_text_bg"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:hint="详细地址：如道路、门牌号、小区、楼栋号、单元室等"
-        android:inputType="textMultiLine"
-        android:minLines="3"
-        android:gravity="top"
-        android:padding="12dp"
-        android:background="@drawable/shape_edit_text_bg"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收货人"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/blue_7"
-        android:text="保存"
-        android:textColor="#FFFFFF" />
+                <EditText
+                    android:id="@+id/address_add_fragment_et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:hint="请填写收货人姓名"
+                    android:inputType="textPersonName"
+                    android:textColor="#333333"
+                    android:textSize="17sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E5E5EA" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="手机号码"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/address_add_fragment_et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:hint="请填写手机号码"
+                    android:inputType="phone"
+                    android:textColor="#333333"
+                    android:textSize="17sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E5E5EA" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="所在地址"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/address_add_fragment_et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:hint="点击选择省市区"
+                    android:textColor="#333333"
+                    android:textSize="17sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E5E5EA" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="详细地址"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="如道路、门牌号、小区、楼栋号、单元室等"
+                    android:inputType="textMultiLine"
+                    android:minHeight="50dp"
+                    android:minLines="2"
+                    android:paddingVertical="12dp"
+                    android:textColor="#333333"
+                    android:textSize="17sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E5E5EA" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/address_add_fragment_btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="@color/blue_7"
+                android:elevation="0dp"
+                android:stateListAnimator="@null"
+                android:text="保存"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="8dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

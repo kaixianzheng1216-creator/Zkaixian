@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="?android:attr/selectableItemBackground"
+    android:background="#FFFFFF"
     android:padding="16dp">
 
     <LinearLayout
@@ -26,7 +25,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/tv_name"
+                    android:id="@+id/item_address_tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#333333"
@@ -35,7 +34,7 @@
                     android:text="张三" />
 
                 <TextView
-                    android:id="@+id/tv_phone"
+                    android:id="@+id/item_address_tv_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -45,7 +44,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_address"
+                android:id="@+id/item_address_tv_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

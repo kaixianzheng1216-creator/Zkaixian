@@ -25,7 +25,7 @@ public class CourseFragment extends Fragment {
         binding = FragmentCourseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         
-        root.findViewById(R.id.iv_back).setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
+        root.findViewById(R.id.course_fragment_iv_back).setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
 
         initViewModel();
 
@@ -43,13 +43,13 @@ public class CourseFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.courseFragmentRvCourse.setLayoutManager(new LinearLayoutManager(getContext()));
 
         courseAdapter = new CourseAdapter(new ArrayList<>());
 
         courseAdapter.setEmptyView(R.layout.layout_empty_view);
 
-        binding.recyclerView.setAdapter(courseAdapter);
+        binding.courseFragmentRvCourse.setAdapter(courseAdapter);
     }
 
     private void observeViewModel() {

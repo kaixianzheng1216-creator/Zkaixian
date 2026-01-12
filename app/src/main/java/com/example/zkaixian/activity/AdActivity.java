@@ -20,8 +20,8 @@ public class AdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad);
 
-        Button btnSkip = findViewById(R.id.btn_skip);
-        ImageView ivAd = findViewById(R.id.iv_ad);
+        Button btnSkip = findViewById(R.id.ad_activity_btn_skip);
+        ImageView ivAd = findViewById(R.id.ad_activity_iv_ad);
 
         Glide.with(this)
                 .asBitmap()

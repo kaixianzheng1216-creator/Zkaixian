@@ -14,6 +14,6 @@ public class EpisodeAdapter extends BaseQuickAdapter<VideoDetail, BaseViewHolder
 
     @Override
     protected void convert(@NotNull BaseViewHolder helper, VideoDetail item) {
-        helper.setText(R.id.tv_episode_name, item.getVideoName());
+        helper.setText(R.id.item_episode_tv_name, item.getVideoName());
     }
 }

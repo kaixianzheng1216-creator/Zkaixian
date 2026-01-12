@@ -48,7 +48,7 @@ public class AddressAddFragment extends Fragment {
                 if (tip.getAddress() != null) fullAddress += tip.getAddress();
                 if (tip.getName() != null) fullAddress += tip.getName();
 
-                binding.etAddress.setText(fullAddress);
+                binding.addressAddFragmentEtAddress.setText(fullAddress);
                 binding.etDetail.setText(tip.getName());
             }
         });
@@ -58,25 +58,25 @@ public class AddressAddFragment extends Fragment {
 
     private void initView() {
         if (editingAddress != null) {
-            binding.tvTitle.setText("编辑收货地址");
-            binding.etName.setText(editingAddress.getName());
-            binding.etPhone.setText(editingAddress.getPhone());
-            binding.etAddress.setText(editingAddress.getAddress());
+            binding.addressAddFragmentTvTitle.setText("编辑收货地址");
+            binding.addressAddFragmentEtName.setText(editingAddress.getName());
+            binding.addressAddFragmentEtPhone.setText(editingAddress.getPhone());
+            binding.addressAddFragmentEtAddress.setText(editingAddress.getAddress());
             binding.etDetail.setText(editingAddress.getDetail());
         }
     }
 
     private void initListener() {
-        binding.ivBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
+        binding.addressAddFragmentIvBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        binding.etAddress.setOnClickListener(v -> {
+        binding.addressAddFragmentEtAddress.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_addressAddFragment_to_addressSearchFragment);
         });
 
-        binding.btnSave.setOnClickListener(v -> {
-            String name = binding.etName.getText().toString().trim();
-            String phone = binding.etPhone.getText().toString().trim();
-            String fullAddress = binding.etAddress.getText().toString().trim();
+        binding.addressAddFragmentBtnSave.setOnClickListener(v -> {
+            String name = binding.addressAddFragmentEtName.getText().toString().trim();
+            String phone = binding.addressAddFragmentEtPhone.getText().toString().trim();
+            String fullAddress = binding.addressAddFragmentEtAddress.getText().toString().trim();
             String detail = binding.etDetail.getText().toString().trim();
 
             if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(detail)) {
