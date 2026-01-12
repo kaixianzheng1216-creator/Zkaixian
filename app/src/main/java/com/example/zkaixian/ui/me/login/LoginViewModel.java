@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.zkaixian.api.UserRetrofitClient;
+import com.example.zkaixian.api.RetrofitClient;
 import com.example.zkaixian.common.ApiResponse;
 import com.example.zkaixian.pojo.User;
 
@@ -34,7 +34,7 @@ public class LoginViewModel extends ViewModel {
         body.put("email", email);
         body.put("password", password);
 
-        UserRetrofitClient.getApiService().login(body).enqueue(new Callback<ApiResponse<User>>() {
+        RetrofitClient.getApiService().login(body).enqueue(new Callback<ApiResponse<User>>() {
             @Override
             public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
                 if (response.isSuccessful() && response.body() != null) {

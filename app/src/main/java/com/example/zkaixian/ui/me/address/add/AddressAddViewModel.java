@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.zkaixian.api.UserRetrofitClient;
+import com.example.zkaixian.api.RetrofitClient;
 import com.example.zkaixian.common.ApiResponse;
 import com.example.zkaixian.pojo.Address;
 
@@ -32,7 +32,7 @@ public class AddressAddViewModel extends ViewModel {
         map.put("address", address.getAddress());
         map.put("detail", address.getDetail());
 
-        UserRetrofitClient.getApiService().updateAddress(id, map).enqueue(new Callback<ApiResponse<Address>>() {
+        RetrofitClient.getApiService().updateAddress(id, map).enqueue(new Callback<ApiResponse<Address>>() {
             @Override
             public void onResponse(Call<ApiResponse<Address>> call, Response<ApiResponse<Address>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -68,7 +68,7 @@ public class AddressAddViewModel extends ViewModel {
         map.put("address", address.getAddress());
         map.put("detail", address.getDetail());
         
-        UserRetrofitClient.getApiService().addAddress(map).enqueue(new Callback<ApiResponse<Address>>() {
+        RetrofitClient.getApiService().addAddress(map).enqueue(new Callback<ApiResponse<Address>>() {
             @Override
             public void onResponse(Call<ApiResponse<Address>> call, Response<ApiResponse<Address>> response) {
                 if (response.isSuccessful() && response.body() != null) {

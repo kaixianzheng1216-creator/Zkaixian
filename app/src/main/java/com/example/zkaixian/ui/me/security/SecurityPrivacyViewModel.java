@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.zkaixian.api.UserRetrofitClient;
+import com.example.zkaixian.api.RetrofitClient;
 import com.example.zkaixian.common.ApiResponse;
 
 import java.util.HashMap;
@@ -37,7 +37,7 @@ public class SecurityPrivacyViewModel extends ViewModel {
         Map<String, String> body = new HashMap<>();
         body.put("email", email);
 
-        UserRetrofitClient.getApiService().sendCode(body).enqueue(new Callback<ApiResponse<Void>>() {
+        RetrofitClient.getApiService().sendCode(body).enqueue(new Callback<ApiResponse<Void>>() {
             @Override
             public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -65,7 +65,7 @@ public class SecurityPrivacyViewModel extends ViewModel {
         body.put("code", code);
         body.put("new_password", newPassword);
 
-        UserRetrofitClient.getApiService().resetPassword(body).enqueue(new Callback<ApiResponse<Void>>() {
+        RetrofitClient.getApiService().resetPassword(body).enqueue(new Callback<ApiResponse<Void>>() {
             @Override
             public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
                 if (response.isSuccessful() && response.body() != null) {

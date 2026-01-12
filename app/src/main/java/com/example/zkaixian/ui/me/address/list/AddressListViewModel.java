@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.zkaixian.api.UserRetrofitClient;
+import com.example.zkaixian.api.RetrofitClient;
 import com.example.zkaixian.common.ApiResponse;
 import com.example.zkaixian.pojo.Address;
 
@@ -40,7 +40,7 @@ public class AddressListViewModel extends ViewModel {
         Map<String, String> params = new HashMap<>();
         params.put("email", email);
         
-        UserRetrofitClient.getApiService().getAddresses(params).enqueue(new Callback<ApiResponse<List<Address>>>() {
+        RetrofitClient.getApiService().getAddresses(params).enqueue(new Callback<ApiResponse<List<Address>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Address>>> call, Response<ApiResponse<List<Address>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -65,7 +65,7 @@ public class AddressListViewModel extends ViewModel {
     }
 
     public void deleteAddress(int id) {
-        UserRetrofitClient.getApiService().deleteAddress(id).enqueue(new Callback<ApiResponse<Void>>() {
+        RetrofitClient.getApiService().deleteAddress(id).enqueue(new Callback<ApiResponse<Void>>() {
             @Override
             public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
                 if (response.isSuccessful() && response.body() != null) {
