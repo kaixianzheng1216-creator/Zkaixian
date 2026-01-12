@@ -62,6 +62,17 @@ public class AddressListFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_addressListFragment_to_addressAddFragment);
         });
 
+        adapter.setOnItemChildClickListener((adapter, view, position) -> {
+            if (view.getId() == R.id.iv_edit) {
+                Address address = (Address) adapter.getItem(position);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("address_data", address);
+
+                Navigation.findNavController(view).navigate(R.id.action_addressListFragment_to_addressAddFragment, bundle);
+            }
+        });
+
         adapter.setOnItemLongClickListener((adapter, view, position) -> {
             Address address = (Address) adapter.getItem(position);
 

@@ -12,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.DELETE;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -39,6 +40,9 @@ public interface UserApiService {
 
     @POST("addresses")
     Call<ApiResponse<Address>> addAddress(@Body Map<String, String> body);
+
+    @PUT("addresses/{id}")
+    Call<ApiResponse<Address>> updateAddress(@Path("id") int id, @Body Map<String, String> body);
 
     @DELETE("addresses/{id}")
     Call<ApiResponse<Void>> deleteAddress(@Path("id") int id);

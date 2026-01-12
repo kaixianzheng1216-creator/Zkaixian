@@ -25,6 +25,37 @@ public class AddressAddViewModel extends ViewModel {
         return addResult;
     }
 
+    public void updateAddress(int id, Address address) {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", address.getName());
+        map.put("phone", address.getPhone());
+        map.put("address", address.getAddress());
+        map.put("detail", address.getDetail());
+
+        UserRetrofitClient.getApiService().updateAddress(id, map).enqueue(new Callback<ApiResponse<Address>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<Address>> call, Response<ApiResponse<Address>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ApiResponse<Address> apiResponse = response.body();
+
+                    if (apiResponse.getCode() == 200) {
+                        addResult.setValue(true);
+                    } else {
+                        error.setValue(apiResponse.getMsg());
+                    }
+                } else {
+                    error.setValue("更新失败: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<Address>> call, Throwable t) {
+                error.setValue("网络错误: " + t.getMessage());
+                Log.e("AddressAddViewModel", "更新地址失败", t);
+            }
+        });
+    }
+
     public LiveData<String> getError() {
         return error;
     }

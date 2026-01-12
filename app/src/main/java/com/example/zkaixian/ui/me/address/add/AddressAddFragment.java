@@ -23,6 +23,7 @@ public class AddressAddFragment extends Fragment {
     private FragmentAddressAddBinding binding;
     private AddressAddViewModel viewModel;
     private UserStorage userStorage;
+    private Address editingAddress;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +31,11 @@ public class AddressAddFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(AddressAddViewModel.class);
         userStorage = new UserStorage(requireContext());
 
+        if (getArguments() != null) {
+            editingAddress = (Address) getArguments().getSerializable("address_data");
+        }
+
+        initView();
         initListener();
         initObservers();
 
@@ -48,6 +54,16 @@ public class AddressAddFragment extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    private void initView() {
+        if (editingAddress != null) {
+            binding.tvTitle.setText("编辑收货地址");
+            binding.etName.setText(editingAddress.getName());
+            binding.etPhone.setText(editingAddress.getPhone());
+            binding.etAddress.setText(editingAddress.getAddress());
+            binding.etDetail.setText(editingAddress.getDetail());
+        }
     }
 
     private void initListener() {
@@ -74,7 +90,11 @@ public class AddressAddFragment extends Fragment {
             address.setAddress(fullAddress);
             address.setDetail(detail);
 
-            viewModel.addAddress(userStorage.getEmail(), address);
+            if (editingAddress != null) {
+                viewModel.updateAddress(editingAddress.getId(), address);
+            } else {
+                viewModel.addAddress(userStorage.getEmail(), address);
+            }
         });
     }
 

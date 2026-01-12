@@ -12,6 +12,8 @@ import java.util.List;
 public class AddressAdapter extends BaseQuickAdapter<Address, BaseViewHolder> {
     public AddressAdapter(List<Address> list) {
         super(R.layout.item_address, list);
+
+        addChildClickViewIds(R.id.iv_edit);
     }
 
     @Override
