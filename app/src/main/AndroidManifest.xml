@@ -15,7 +15,6 @@
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icon"
-        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Zkaixian"
         android:usesCleartextTraffic="true"
@@ -40,6 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="782f07c8a50f41501317e43f273c752f" />
     </application>
 
 </manifest>

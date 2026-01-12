@@ -109,6 +109,10 @@
         <action
             android:id="@+id/action_navigation_me_to_securityPrivacyFragment"
             app:destination="@id/securityPrivacyFragment" />
+
+        <action
+            android:id="@+id/action_navigation_me_to_addressListFragment"
+            app:destination="@id/addressListFragment" />
     </fragment>
 
     <fragment
@@ -149,4 +153,30 @@
         android:name="com.example.zkaixian.ui.me.security.SecurityPrivacyFragment"
         android:label="安全隐私"
         tools:layout="@layout/fragment_security_privacy" />
+
+    <fragment
+        android:id="@+id/addressListFragment"
+        android:name="com.example.zkaixian.ui.me.address.list.AddressListFragment"
+        android:label="收货地址"
+        tools:layout="@layout/fragment_address_list">
+        <action
+            android:id="@+id/action_addressListFragment_to_addressAddFragment"
+            app:destination="@id/addressAddFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addressAddFragment"
+        android:name="com.example.zkaixian.ui.me.address.add.AddressAddFragment"
+        android:label="新建收货地址"
+        tools:layout="@layout/fragment_address_add">
+        <action
+            android:id="@+id/action_addressAddFragment_to_addressSearchFragment"
+            app:destination="@id/addressSearchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addressSearchFragment"
+        android:name="com.example.zkaixian.ui.me.address.search.AddressSearchFragment"
+        android:label="搜索地址"
+        tools:layout="@layout/fragment_address_search" />
 </navigation>

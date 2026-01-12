@@ -65,4 +65,5 @@ dependencies {
     implementation libs.github.gsyvideoplayer
     implementation libs.material.v190
     implementation libs.xpopup
+    implementation libs.xdmap
 }

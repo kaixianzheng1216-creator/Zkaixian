@@ -40,6 +40,7 @@ public class AccountProfileViewModel extends ViewModel {
             public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ApiResponse<User> apiResponse = response.body();
+
                     if (apiResponse.getCode() == 200) {
                         updateResult.setValue(apiResponse.getData());
                     } else {

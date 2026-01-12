@@ -39,6 +39,7 @@ public class LoginViewModel extends ViewModel {
             public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ApiResponse<User> apiResponse = response.body();
+
                     if (apiResponse.getCode() == 200) {
                         loginResult.setValue(apiResponse.getData());
                     } else {

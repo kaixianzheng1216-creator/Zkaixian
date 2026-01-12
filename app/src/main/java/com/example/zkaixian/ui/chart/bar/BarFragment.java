@@ -26,7 +26,7 @@ public class BarFragment extends Fragment {
         BarViewModel barViewModel = new ViewModelProvider(this).get(BarViewModel.class);
         binding = FragmentBarBinding.inflate(inflater, container, false);
 
-        binding.getRoot().findViewById(com.example.zkaixian.R.id.iv_back).setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
+        binding.ivBack.setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
 
         BarChart barChart = binding.barChart;
         ChartStyleUtils.initXYChartStyle(barChart);

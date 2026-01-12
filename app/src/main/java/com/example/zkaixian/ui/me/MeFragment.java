@@ -116,7 +116,8 @@ public class MeFragment extends Fragment {
 
         binding.meLlShippingAddress.setOnClickListener(v -> {
             if (checkLogin(v)) {
-                showDevPopup();
+                Navigation.findNavController(v)
+                        .navigate(R.id.action_navigation_me_to_addressListFragment);
             }
         });
 

@@ -29,7 +29,7 @@ public class PieFragment extends Fragment {
         PieViewModel pieViewModel = new ViewModelProvider(this).get(PieViewModel.class);
         binding = FragmentPieBinding.inflate(inflater, container, false);
         
-        binding.getRoot().findViewById(com.example.zkaixian.R.id.iv_back).setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
+        binding.ivBack.setOnClickListener(v -> androidx.navigation.Navigation.findNavController(v).navigateUp());
 
         PieChart pieChart = binding.pieChart;
         initPieSpecificStyle(pieChart);
