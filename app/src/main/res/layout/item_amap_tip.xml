@@ -7,7 +7,7 @@
     android:padding="12dp">
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/item_amap_tip_tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#333333"
