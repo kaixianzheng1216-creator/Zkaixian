@@ -62,16 +62,19 @@ public class CourseFragment extends Fragment {
 
     private void loadData() {
         int courseType = 1;
+
         if (getArguments() != null) {
-            courseType = getArguments().getInt("course_type", 1);
+            courseType = getArguments().getInt("course_type");
         }
         
         updateTitle(courseType);
+
         courseViewModel.fetchCourses(courseType);
     }
 
     private void updateTitle(int courseType) {
         String title;
+
         switch (courseType) {
             case 2:
                 title = "算法题库";
@@ -87,6 +90,7 @@ public class CourseFragment extends Fragment {
                 title = "全栈课程";
                 break;
         }
+
         binding.courseFragmentTvPageTitle.setText(title);
     }
 

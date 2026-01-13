@@ -28,27 +28,33 @@ import java.util.Collections;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+
     private FragmentHomeBinding binding;
     private HomeViewModel homeViewModel;
     private HomeAdapter homeAdapter;
     private Banner banner;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         initViewModel();
-
         initRecyclerView();
-
         initRefreshLayout();
-
         observeViewModel();
-
         loadData();
 
         return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     private void initViewModel() {
@@ -56,10 +62,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        binding.homeFragmentRvNews.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.homeFragmentRvNews.setLayoutManager(
+                new LinearLayoutManager(getContext())
+        );
 
         initAdapter();
-
         addHeaderView();
 
         binding.homeFragmentRvNews.setAdapter(homeAdapter);
@@ -69,23 +76,18 @@ public class HomeFragment extends Fragment {
         homeAdapter = new HomeAdapter(new ArrayList<>());
 
         homeAdapter.setEmptyView(R.layout.layout_empty_view);
-
         homeAdapter.setOnItemClickListener(this::onNewsItemClick);
     }
 
-    private void onNewsItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-        News item = homeAdapter.getData().get(position);
-
-        Bundle bundle = new Bundle();
-        bundle.putString("url", item.getNewsUrl());
-
-        Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_webFragment, bundle);
-    }
-
     private void addHeaderView() {
-        View headerView = getLayoutInflater().inflate(R.layout.layout_home_header, binding.homeFragmentRvNews, false);
+        View headerView = getLayoutInflater().inflate(
+                R.layout.layout_home_header,
+                binding.homeFragmentRvNews,
+                false
+        );
 
         initHeaderBanner(headerView);
+
         initHeaderMenu(headerView);
 
         homeAdapter.setHeaderView(headerView);
@@ -101,29 +103,37 @@ public class HomeFragment extends Fragment {
     }
 
     private void initHeaderMenu(View headerView) {
-        headerView.findViewById(R.id.layout_home_header_ll_menu_course).setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt("course_type", 1);
-            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment, bundle);
-        });
+        headerView.findViewById(R.id.layout_home_header_ll_menu_course)
+                .setOnClickListener(v -> jumpToCourse(v, 1));
 
-        headerView.findViewById(R.id.layout_home_header_ll_menu_practice).setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt("course_type", 2);
-            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment, bundle);
-        });
+        headerView.findViewById(R.id.layout_home_header_ll_menu_practice)
+                .setOnClickListener(v -> jumpToCourse(v, 2));
 
-        headerView.findViewById(R.id.ll_menu_article).setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt("course_type", 3);
-            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment, bundle);
-        });
+        headerView.findViewById(R.id.ll_menu_article)
+                .setOnClickListener(v -> jumpToCourse(v, 3));
 
-        headerView.findViewById(R.id.layout_home_header_ll_menu_project).setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt("course_type", 4);
-            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment, bundle);
-        });
+        headerView.findViewById(R.id.layout_home_header_ll_menu_project)
+                .setOnClickListener(v -> jumpToCourse(v, 4));
+    }
+
+    private void jumpToCourse(View v, int type) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("course_type", type);
+
+        Navigation.findNavController(v)
+                .navigate(R.id.action_navigation_home_to_courseFragment, bundle);
+    }
+
+    private void onNewsItemClick(@NonNull BaseQuickAdapter adapter,
+                                 @NonNull View view,
+                                 int position) {
+        News item = homeAdapter.getData().get(position);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("url", item.getNewsUrl());
+
+        Navigation.findNavController(view)
+                .navigate(R.id.action_navigation_home_to_webFragment, bundle);
     }
 
     private void initRefreshLayout() {
@@ -137,35 +147,30 @@ public class HomeFragment extends Fragment {
             refresh.finishRefresh(1000);
         });
 
-        refreshLayout.setOnLoadMoreListener(refresh -> {
-            refresh.finishLoadMore(1000);
-        });
+        refreshLayout.setOnLoadMoreListener(refresh ->
+                refresh.finishLoadMore(1000)
+        );
     }
 
     private void observeViewModel() {
-        homeViewModel.getAdList().observe(getViewLifecycleOwner(), ads -> {
-            if (ads != null) {
-                banner.addBannerLifecycleObserver(this)
-                        .setAdapter(new ImageTitleBannerAdapter(ads));
-            }
-        });
+        homeViewModel.getAdList()
+                .observe(getViewLifecycleOwner(), ads -> {
+                    if (ads != null) {
+                        banner.addBannerLifecycleObserver(this)
+                                .setAdapter(new ImageTitleBannerAdapter(ads));
+                    }
+                });
 
-        homeViewModel.getNewsList().observe(getViewLifecycleOwner(), news -> {
-            if (news != null) {
-                homeAdapter.setList(news);
-            }
-        });
+        homeViewModel.getNewsList()
+                .observe(getViewLifecycleOwner(), news -> {
+                    if (news != null) {
+                        homeAdapter.setList(news);
+                    }
+                });
     }
 
     private void loadData() {
         homeViewModel.fetchAds();
         homeViewModel.fetchNews();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        binding = null;
     }
 }

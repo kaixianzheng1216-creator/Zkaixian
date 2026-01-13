@@ -25,6 +25,7 @@ public class CourseViewModel extends ViewModel {
 
     public void fetchCourses(int type) {
         Call<List<Course>> call;
+
         switch (type) {
             case 2:
                 call = RetrofitClient.getApiService().getAlgorithmList();
