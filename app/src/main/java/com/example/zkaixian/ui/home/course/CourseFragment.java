@@ -53,7 +53,7 @@ public class CourseFragment extends Fragment {
     }
 
     private void observeViewModel() {
-        courseViewModel.getPythonCourseList().observe(getViewLifecycleOwner(), courses -> {
+        courseViewModel.getCourseList().observe(getViewLifecycleOwner(), courses -> {
             if (courses != null) {
                 courseAdapter.setList(courses);
             }
@@ -61,7 +61,33 @@ public class CourseFragment extends Fragment {
     }
 
     private void loadData() {
-        courseViewModel.fetchPythonCourses();
+        int courseType = 1;
+        if (getArguments() != null) {
+            courseType = getArguments().getInt("course_type", 1);
+        }
+        
+        updateTitle(courseType);
+        courseViewModel.fetchCourses(courseType);
+    }
+
+    private void updateTitle(int courseType) {
+        String title;
+        switch (courseType) {
+            case 2:
+                title = "算法题库";
+                break;
+            case 3:
+                title = "技术专栏";
+                break;
+            case 4:
+                title = "开源项目";
+                break;
+            case 1:
+            default:
+                title = "全栈课程";
+                break;
+        }
+        binding.courseFragmentTvPageTitle.setText(title);
     }
 
     @Override

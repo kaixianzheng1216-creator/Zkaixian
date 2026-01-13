@@ -1,56 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="16dp"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/item_course_tv_content"
+        android:id="@+id/item_course_tv_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:ellipsize="end"
-        android:lineSpacingExtra="2dp"
+        android:lineSpacingExtra="4dp"
         android:maxLines="2"
-        android:text="人工智能+Python基础班2017-08-18"
-        android:textColor="#000000"
+        android:textColor="#333333"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/item_course_tv_address"
-        app:layout_constraintEnd_toStartOf="@+id/item_course_tv_open_class"
+        app:layout_constraintEnd_toStartOf="@+id/item_course_tv_tag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:text="人工智能+Python基础班2017-08-18" />
+        tools:text="人工智能+Python基础班" />
 
     <TextView
-        android:id="@+id/item_course_tv_address"
-        android:layout_width="wrap_content"
+        android:id="@+id/item_course_tv_subtitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="16dp"
-        android:text="北京"
+        android:layout_marginTop="8dp"
         android:textColor="#999999"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/item_course_view_divider"
-        app:layout_constraintStart_toStartOf="@+id/item_course_tv_content"
-        app:layout_constraintTop_toBottomOf="@+id/item_course_tv_content"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@+id/item_course_tv_tag"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_course_tv_title"
         tools:text="北京" />
 
     <TextView
-        android:id="@+id/item_course_tv_open_class"
+        android:id="@+id/item_course_tv_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:padding="8dp"
-        android:text="我要报名"
         android:textColor="#2196F3"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/item_course_view_divider"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="我要报名" />
@@ -59,7 +53,8 @@
         android:id="@+id/item_course_view_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#E5E5EA"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_marginTop="16dp"
+        android:background="#F5F5F5"
+        app:layout_constraintTop_toBottomOf="@id/item_course_tv_subtitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

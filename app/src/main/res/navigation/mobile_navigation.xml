@@ -24,7 +24,12 @@
         android:id="@+id/navigation_course"
         android:name="com.example.zkaixian.ui.home.course.CourseFragment"
         android:label="@string/course"
-        tools:layout="@layout/fragment_course" />
+        tools:layout="@layout/fragment_course">
+        <argument
+            android:name="course_type"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_web"

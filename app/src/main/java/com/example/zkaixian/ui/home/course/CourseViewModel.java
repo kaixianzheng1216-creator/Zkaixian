@@ -17,20 +17,36 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CourseViewModel extends ViewModel {
-    private final MutableLiveData<List<Course>> pythonCourseList = new MutableLiveData<>();
+    private final MutableLiveData<List<Course>> courseList = new MutableLiveData<>();
 
-    public LiveData<List<Course>> getPythonCourseList() {
-        return pythonCourseList;
+    public LiveData<List<Course>> getCourseList() {
+        return courseList;
     }
 
-    public void fetchPythonCourses() {
-        RetrofitClient.getApiService().getPythonList().enqueue(new Callback<List<Course>>() {
+    public void fetchCourses(int type) {
+        Call<List<Course>> call;
+        switch (type) {
+            case 2:
+                call = RetrofitClient.getApiService().getAlgorithmList();
+                break;
+            case 3:
+                call = RetrofitClient.getApiService().getTechColumnList();
+                break;
+            case 4:
+                call = RetrofitClient.getApiService().getOpenSourceList();
+                break;
+            case 1:
+            default:
+                call = RetrofitClient.getApiService().getCourseList();
+                break;
+        }
+
+        call.enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(@NonNull Call<List<Course>> call, @NonNull Response<List<Course>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d("CourseViewModel", "课程请求成功" + response.body());
-
-                    pythonCourseList.setValue(response.body());
+                    courseList.setValue(response.body());
                 } else {
                     Log.e("CourseViewModel", "课程请求失败: " + response.code());
                 }

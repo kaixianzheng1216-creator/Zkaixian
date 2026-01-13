@@ -10,12 +10,12 @@ public class Course {
     @SerializedName("id")
     private Integer id;
 
-    @SerializedName("address")
-    private String address;
+    @SerializedName("title")
+    private String title;
 
-    @SerializedName("content")
-    private String content;
+    @SerializedName("subtitle")
+    private String subtitle;
 
-    @SerializedName("open_class")
-    private String openClass;
+    @SerializedName("tag")
+    private String tag;
 }

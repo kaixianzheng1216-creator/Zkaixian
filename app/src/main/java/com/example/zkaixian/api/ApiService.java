@@ -26,8 +26,17 @@ public interface ApiService {
     @GET("home_news_list_data.json")
     Call<List<News>> getNewsList();
 
-    @GET("python_list_data.json")
-    Call<List<Course>> getPythonList();
+    @GET("course_list_data.json")
+    Call<List<Course>> getCourseList();
+
+    @GET("algorithm_list_data.json")
+    Call<List<Course>> getAlgorithmList();
+
+    @GET("tech_column_list_data.json")
+    Call<List<Course>> getTechColumnList();
+
+    @GET("open_source_list_data.json")
+    Call<List<Course>> getOpenSourceList();
 
     @GET("video_list_data.json")
     Call<List<Video>> getVideoList();

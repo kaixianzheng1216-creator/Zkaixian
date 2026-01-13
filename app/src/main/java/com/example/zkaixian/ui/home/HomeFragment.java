@@ -102,7 +102,27 @@ public class HomeFragment extends Fragment {
 
     private void initHeaderMenu(View headerView) {
         headerView.findViewById(R.id.layout_home_header_ll_menu_course).setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment);
+            Bundle bundle = new Bundle();
+            bundle.putInt("course_type", 1);
+            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment, bundle);
+        });
+
+        headerView.findViewById(R.id.layout_home_header_ll_menu_practice).setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("course_type", 2);
+            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment, bundle);
+        });
+
+        headerView.findViewById(R.id.ll_menu_article).setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("course_type", 3);
+            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment, bundle);
+        });
+
+        headerView.findViewById(R.id.layout_home_header_ll_menu_project).setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("course_type", 4);
+            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_courseFragment, bundle);
         });
     }
 
