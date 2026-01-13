@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.zkaixian.databinding.FragmentForgotPasswordBinding;
@@ -25,7 +26,7 @@ public class ForgetPasswordFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentForgotPasswordBinding.inflate(inflater, container, false);
         userStorage = new UserStorage(requireContext());
-        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(ForgetPasswordViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ForgetPasswordViewModel.class);
 
         initObservers();
         initListener();
@@ -45,6 +46,7 @@ public class ForgetPasswordFragment extends Fragment {
         viewModel.getResetPasswordResult().observe(getViewLifecycleOwner(), success -> {
             if (success) {
                 userStorage.setLogin(false);
+
                 new XPopup.Builder(requireContext())
                         .dismissOnTouchOutside(false)
                         .setPopupCallback(new SimpleCallback() {
@@ -80,6 +82,7 @@ public class ForgetPasswordFragment extends Fragment {
 
     private void sendVerifyCode() {
         String email = binding.forgotPasswordFragmentEtEmail.getText().toString().trim();
+
         if (TextUtils.isEmpty(email)) {
             new XPopup.Builder(requireContext())
                     .asConfirm("提示", "请先输入邮箱",
@@ -88,6 +91,7 @@ public class ForgetPasswordFragment extends Fragment {
                     .show();
             return;
         }
+
         viewModel.sendCode(email);
     }
 

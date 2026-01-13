@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
@@ -18,7 +19,6 @@ import com.example.zkaixian.utils.UserStorage;
 import com.lxj.xpopup.XPopup;
 
 public class MeFragment extends Fragment {
-
     private FragmentMeBinding binding;
     private UserStorage userStorage;
     private MeViewModel viewModel;
@@ -31,17 +31,24 @@ public class MeFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         binding = FragmentMeBinding.inflate(inflater, container, false);
+
         userStorage = new UserStorage(requireContext());
-        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(MeViewModel.class);
+
+        viewModel = new ViewModelProvider(this).get(MeViewModel.class);
+
         initObservers();
+
         initListener();
+
         refreshUserState();
+
         return binding.getRoot();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         refreshUserState();
     }
 
@@ -92,32 +99,27 @@ public class MeFragment extends Fragment {
     private void initListener() {
         binding.meFragmentClUserProfile.setOnClickListener(v -> {
             if (!isLogin) {
-                Navigation.findNavController(v)
-                        .navigate(R.id.action_navigation_me_to_loginFragment);
+                Navigation.findNavController(v).navigate(R.id.action_navigation_me_to_loginFragment);
             } else {
-                Navigation.findNavController(v)
-                        .navigate(R.id.action_navigation_me_to_accountProfileFragment);
+                Navigation.findNavController(v).navigate(R.id.action_navigation_me_to_accountProfileFragment);
             }
         });
 
         binding.meFragmentLlAccountProfile.setOnClickListener(v -> {
             if (checkLogin(v)) {
-                Navigation.findNavController(v)
-                        .navigate(R.id.action_navigation_me_to_accountProfileFragment);
+                Navigation.findNavController(v).navigate(R.id.action_navigation_me_to_accountProfileFragment);
             }
         });
 
         binding.meFragmentLlSecurityPrivacy.setOnClickListener(v -> {
             if (checkLogin(v)) {
-                Navigation.findNavController(v)
-                        .navigate(R.id.action_navigation_me_to_securityPrivacyFragment);
+                Navigation.findNavController(v).navigate(R.id.action_navigation_me_to_securityPrivacyFragment);
             }
         });
 
         binding.meFragmentLlShippingAddress.setOnClickListener(v -> {
             if (checkLogin(v)) {
-                Navigation.findNavController(v)
-                        .navigate(R.id.action_navigation_me_to_addressListFragment);
+                Navigation.findNavController(v).navigate(R.id.action_navigation_me_to_addressListFragment);
             }
         });
 

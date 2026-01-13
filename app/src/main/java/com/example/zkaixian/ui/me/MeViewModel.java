@@ -38,6 +38,7 @@ public class MeViewModel extends ViewModel {
             public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ApiResponse<User> apiResponse = response.body();
+
                     if (apiResponse.getCode() == 200) {
                         userInfoResult.setValue(apiResponse.getData());
                     } else {

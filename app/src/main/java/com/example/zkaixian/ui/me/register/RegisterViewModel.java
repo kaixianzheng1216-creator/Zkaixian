@@ -42,10 +42,12 @@ public class RegisterViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getCode() == 200) {
+                    ApiResponse<Void> apiResponse = response.body();
+
+                    if (apiResponse.getCode() == 200) {
                         sendCodeResult.setValue(true);
                     } else {
-                        error.setValue(response.body().getMsg());
+                        error.setValue(apiResponse.getMsg());
                     }
                 } else {
                     error.setValue("验证码发送失败: " + response.code());

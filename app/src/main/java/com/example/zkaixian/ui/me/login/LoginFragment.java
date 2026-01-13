@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.zkaixian.R;
@@ -25,11 +26,15 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
+
         userStorage = new UserStorage(requireContext());
-        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(LoginViewModel.class);
+
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         initObservers();
+
         initListener();
+
         return binding.getRoot();
     }
 

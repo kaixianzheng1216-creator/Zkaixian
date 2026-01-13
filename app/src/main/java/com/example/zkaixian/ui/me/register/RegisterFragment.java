@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.zkaixian.databinding.FragmentRegisterBinding;
@@ -25,7 +26,7 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRegisterBinding.inflate(inflater, container, false);
         userStorage = new UserStorage(requireContext());
-        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(RegisterViewModel.class);
+        viewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
         initObservers();
         initListener();
@@ -45,6 +46,7 @@ public class RegisterFragment extends Fragment {
         viewModel.getRegisterResult().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
                 userStorage.saveUserInfo(user.getUsername(), user.getEmail());
+
                 new XPopup.Builder(requireContext())
                         .dismissOnTouchOutside(false)
                         .setPopupCallback(new SimpleCallback() {

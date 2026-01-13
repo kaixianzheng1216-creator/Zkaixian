@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
@@ -27,10 +28,12 @@ public class AccountProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAccountProfileBinding.inflate(inflater, container, false);
         userStorage = new UserStorage(requireContext());
-        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(AccountProfileViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AccountProfileViewModel.class);
 
         initView();
+
         initObservers();
+
         initListener();
 
         return binding.getRoot();

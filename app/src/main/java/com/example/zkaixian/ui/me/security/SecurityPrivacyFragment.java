@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.zkaixian.databinding.FragmentSecurityPrivacyBinding;
@@ -25,7 +26,7 @@ public class SecurityPrivacyFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSecurityPrivacyBinding.inflate(inflater, container, false);
         userStorage = new UserStorage(requireContext());
-        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(SecurityPrivacyViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SecurityPrivacyViewModel.class);
 
         initView();
         initObservers();
