@@ -30,6 +30,7 @@ public class ForgetPasswordFragment extends Fragment {
 
         initObservers();
         initListener();
+
         return binding.getRoot();
     }
 

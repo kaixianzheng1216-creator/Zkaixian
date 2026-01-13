@@ -30,6 +30,7 @@ public class RegisterFragment extends Fragment {
 
         initObservers();
         initListener();
+
         return binding.getRoot();
     }
 

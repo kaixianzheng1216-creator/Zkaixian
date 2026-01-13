@@ -32,7 +32,6 @@ public class LoginFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         initObservers();
-
         initListener();
 
         return binding.getRoot();

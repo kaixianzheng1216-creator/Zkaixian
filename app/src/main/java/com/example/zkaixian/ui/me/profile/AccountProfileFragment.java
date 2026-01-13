@@ -31,9 +31,7 @@ public class AccountProfileFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(AccountProfileViewModel.class);
 
         initView();
-
         initObservers();
-
         initListener();
 
         return binding.getRoot();
