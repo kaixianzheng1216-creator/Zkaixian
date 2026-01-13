@@ -21,7 +21,7 @@ import com.lxj.xpopup.XPopup;
 public class MeFragment extends Fragment {
     private FragmentMeBinding binding;
     private UserStorage userStorage;
-    private MeViewModel meViewModel;
+    private MeViewModel viewModel;
     private boolean isLogin = false;
 
     @Override
@@ -34,7 +34,7 @@ public class MeFragment extends Fragment {
 
         userStorage = new UserStorage(requireContext());
 
-        meViewModel = new ViewModelProvider(this).get(MeViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MeViewModel.class);
 
         initObservers();
 
@@ -63,7 +63,7 @@ public class MeFragment extends Fragment {
             binding.meFragmentTvUserEmail.setText(userEmail);
             binding.meFragmentTvUserEmail.setVisibility(View.VISIBLE);
 
-            meViewModel.fetchUserInfo(userEmail);
+            viewModel.fetchUserInfo(userEmail);
 
             binding.meFragmentTvCourseCount.setText(String.valueOf(userStorage.getCourseCount()));
             binding.meFragmentTvStudyTime.setText(userStorage.getStudyTime());
@@ -85,7 +85,7 @@ public class MeFragment extends Fragment {
     }
 
     private void initObservers() {
-        meViewModel.getUserInfoResult().observe(getViewLifecycleOwner(), user -> {
+        viewModel.getUserInfoResult().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
                 userStorage.saveUserStats(user.getCourse_count(), user.getStudy_time(), user.getCertificate_count());
 
