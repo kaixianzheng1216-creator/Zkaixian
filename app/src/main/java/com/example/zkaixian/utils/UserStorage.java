@@ -51,15 +51,15 @@ public class UserStorage {
     }
 
     public String getUserName() {
-        return sp.getString(KEY_USER_NAME, "user");
+        return sp.getString(KEY_USER_NAME, "");
     }
 
     public String getEmail() {
-        return sp.getString(KEY_USER_EMAIL, "user@example.com");
+        return sp.getString(KEY_USER_EMAIL, "");
     }
 
     public String getBio() {
-        return sp.getString(KEY_USER_BIO, "user bio");
+        return sp.getString(KEY_USER_BIO, "");
     }
 
     public int getCourseCount() {
