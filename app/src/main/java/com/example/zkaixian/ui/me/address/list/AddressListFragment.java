@@ -63,7 +63,7 @@ public class AddressListFragment extends Fragment {
         });
 
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
-            if (view.getId() == R.id.iv_edit) {
+            if (view.getId() == R.id.item_address_tv_address) {
                 Address address = (Address) adapter.getItem(position);
 
                 Bundle bundle = new Bundle();

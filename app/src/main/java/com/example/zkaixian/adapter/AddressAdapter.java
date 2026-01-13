@@ -13,7 +13,7 @@ public class AddressAdapter extends BaseQuickAdapter<Address, BaseViewHolder> {
     public AddressAdapter(List<Address> list) {
         super(R.layout.item_address, list);
 
-        addChildClickViewIds(R.id.iv_edit);
+        addChildClickViewIds(R.id.item_address_tv_address);
     }
 
     @Override
