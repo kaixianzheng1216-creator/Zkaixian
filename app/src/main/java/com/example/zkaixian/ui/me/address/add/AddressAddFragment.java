@@ -49,7 +49,7 @@ public class AddressAddFragment extends Fragment {
                 if (tip.getName() != null) fullAddress += tip.getName();
 
                 binding.addressAddFragmentEtAddress.setText(fullAddress);
-                binding.etDetail.setText(tip.getName());
+                binding.addressAddFragmentEtDetail.setText(tip.getName());
             }
         });
 
@@ -62,7 +62,7 @@ public class AddressAddFragment extends Fragment {
             binding.addressAddFragmentEtName.setText(editingAddress.getName());
             binding.addressAddFragmentEtPhone.setText(editingAddress.getPhone());
             binding.addressAddFragmentEtAddress.setText(editingAddress.getAddress());
-            binding.etDetail.setText(editingAddress.getDetail());
+            binding.addressAddFragmentEtDetail.setText(editingAddress.getDetail());
         }
     }
 
@@ -77,7 +77,7 @@ public class AddressAddFragment extends Fragment {
             String name = binding.addressAddFragmentEtName.getText().toString().trim();
             String phone = binding.addressAddFragmentEtPhone.getText().toString().trim();
             String fullAddress = binding.addressAddFragmentEtAddress.getText().toString().trim();
-            String detail = binding.etDetail.getText().toString().trim();
+            String detail = binding.addressAddFragmentEtDetail.getText().toString().trim();
 
             if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(detail)) {
                 new XPopup.Builder(getContext()).asCenterList("请填写完整信息", new String[]{"确定"}, null).show();

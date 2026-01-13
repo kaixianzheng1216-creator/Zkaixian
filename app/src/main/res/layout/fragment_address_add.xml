@@ -149,7 +149,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/et_detail"
+                    android:id="@+id/address_add_fragment_et_Detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
