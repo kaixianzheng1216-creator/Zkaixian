@@ -16,13 +16,13 @@
         android:layout_height="44dp"
         android:background="#FFFFFF"
         app:tabBackground="@android:color/transparent"
-        app:tabRippleColor="@android:color/transparent"
         app:tabIndicatorColor="#007AFF"
-        app:tabIndicatorHeight="3dp"
         app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="3dp"
+        app:tabRippleColor="@android:color/transparent"
         app:tabSelectedTextColor="#007AFF"
-        app:tabTextColor="#8E8E93"
-        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabTextColor="#8E8E93">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

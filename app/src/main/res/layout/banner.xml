@@ -12,6 +12,7 @@
         android:id="@+id/banner_tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="#66000000"
         android:ellipsize="marquee"
         android:focusable="true"
@@ -19,6 +20,5 @@
         android:gravity="center_vertical"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="#ffffff"
-        android:layout_alignParentBottom="true"/>
+        android:textColor="#ffffff" />
 </RelativeLayout>

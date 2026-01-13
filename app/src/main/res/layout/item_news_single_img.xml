@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:paddingTop="8dp"
     android:paddingStart="16dp"
+    android:paddingTop="8dp"
     android:paddingEnd="16dp">
+
     <TextView
         android:id="@+id/item_news_single_img_tv_title"
         android:layout_width="0dp"
@@ -49,6 +50,6 @@
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
         android:background="#E0E0E0"
-        app:layout_constraintTop_toBottomOf="@+id/item_news_single_img_iv_1"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_news_single_img_iv_1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
