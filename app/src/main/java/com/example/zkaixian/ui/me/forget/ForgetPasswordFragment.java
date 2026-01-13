@@ -16,16 +16,16 @@ import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.SimpleCallback;
 
-public class ForgotPasswordFragment extends Fragment {
+public class ForgetPasswordFragment extends Fragment {
     private FragmentForgotPasswordBinding binding;
     private UserStorage userStorage;
-    private ForgotPasswordViewModel viewModel;
+    private ForgetPasswordViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentForgotPasswordBinding.inflate(inflater, container, false);
         userStorage = new UserStorage(requireContext());
-        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(ForgotPasswordViewModel.class);
+        viewModel = new androidx.lifecycle.ViewModelProvider(this).get(ForgetPasswordViewModel.class);
 
         initObservers();
         initListener();

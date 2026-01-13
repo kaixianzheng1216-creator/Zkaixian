@@ -143,7 +143,7 @@
 
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.example.zkaixian.ui.me.forget.ForgotPasswordFragment"
+        android:name="com.example.zkaixian.ui.me.forget.ForgetPasswordFragment"
         android:label="忘记密码"
         tools:layout="@layout/fragment_forgot_password" />
 

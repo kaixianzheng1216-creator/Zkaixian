@@ -16,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ForgotPasswordViewModel extends ViewModel {
+public class ForgetPasswordViewModel extends ViewModel {
     private final MutableLiveData<Boolean> sendCodeResult = new MutableLiveData<>();
     private final MutableLiveData<Boolean> resetPasswordResult = new MutableLiveData<>();
     private final MutableLiveData<String> error = new MutableLiveData<>();
@@ -54,7 +54,7 @@ public class ForgotPasswordViewModel extends ViewModel {
             @Override
             public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
                 error.setValue("网络错误: " + t.getMessage());
-                Log.e("ForgotPasswordViewModel", "验证码发送失败: ", t);
+                Log.e("ForgetPasswordViewModel", "验证码发送失败: ", t);
             }
         });
     }
@@ -82,7 +82,7 @@ public class ForgotPasswordViewModel extends ViewModel {
             @Override
             public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
                 error.setValue("网络错误: " + t.getMessage());
-                Log.e("ForgotPasswordViewModel", "密码重置失败: ", t);
+                Log.e("ForgetPasswordViewModel", "密码重置失败: ", t);
             }
         });
     }
