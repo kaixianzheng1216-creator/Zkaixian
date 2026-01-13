@@ -168,5 +168,4 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:cornerRadius="8dp" />
-
 </LinearLayout>
