@@ -15,9 +15,5 @@ public class Address implements Serializable {
     private String phone;
     private String address;
     private String detail;
-    
-    // @SerializedName("is_default")
-    // private boolean isDefault;
-    
     private String email;
 }

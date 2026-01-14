@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:allowNativeHeapPointerTagging="false"
         android:allowBackup="true"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
         android:dataExtractionRules="@xml/data_extraction_rules"

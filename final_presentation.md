@@ -23,37 +23,59 @@
 
 ## 2. 启动流程与主页模块
 
-### 2.1 启动引导页 (IntroActivity)
+### 2.1 闪屏页 (SplashScreen)
 **设计思路**：
-应用首次安装运行时，通过引导页向用户展示 App 的核心亮点（如 MVVM 架构、地图功能等）。
+遵循 Google 最新的 Material Design 规范，使用 Android 12+ 引入的 SplashScreen API 实现无缝启动体验，提升应用的专业感。
+**实现细节**：
+*   **主题配置**：在 `themes.xml` 中定义 `Theme.App.Starting`，设置启动背景色、图标以及动画时长。指定 `postSplashScreenTheme` 为应用主主题，确保启动结束后自动切换。
+*   **代码调用**：在 `MainActivity` 的 `onCreate` 中调用 `installSplashScreen()`，系统会自动处理等待逻辑。
 
+**核心代码**：
+```xml
+<!-- themes.xml -->
+<style name="Theme.App.Starting" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenBackground">@color/white</item>
+    <item name="windowSplashScreenAnimatedIcon">@drawable/icon</item>
+    <item name="postSplashScreenTheme">@style/Theme.Zkaixian</item>
+</style>
+```
+```java
+// MainActivity.java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    // 安装 SplashScreen，必须在 super.onCreate 之前调用
+    SplashScreen.installSplashScreen(this);
+    super.onCreate(savedInstanceState);
+    // ...
+}
+```
+
+### 2.2 启动引导页 (IntroActivity)
+**设计思路**：
+在用户首次安装运行时展示，通过图文并茂的方式介绍 App 的核心亮点（如 MVVM 架构、地图功能等），帮助用户快速上手。
 **实现细节**：
 继承自 `AppIntro` 库，简化了 ViewPager 的搭建。在 `onCreate` 中添加多个 `AppIntroFragment` 实例，每个实例对应一页介绍。用户点击“完成”后，将标志位写入 `SharedPreferences`，下次启动不再显示。
 
 **核心代码**：
 ```java
 // IntroActivity.java
-@Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    // 添加引导页 Slide，配置标题、描述、图片和背景色
-    addSlide(AppIntroFragment.createInstance("第一日", "启动页与基础框架", R.drawable.day1, ...));
-    addSlide(AppIntroFragment.createInstance("第二日", "LiveData + Retrofit", R.drawable.day2, ...));
-    // ...
-}
+// 添加引导页 Slide，配置标题、描述、图片和背景色
+addSlide(AppIntroFragment.createInstance("第一日", "启动页与基础框架", R.drawable.day1, ...));
+addSlide(AppIntroFragment.createInstance("第二日", "LiveData + Retrofit", R.drawable.day2, ...));
 
 // 完成引导后的处理
 private void completeIntro() {
     // 标记为非首次运行
     getSharedPreferences("AppPrefs", MODE_PRIVATE).edit().putBoolean("isFirstRun", false).apply();
+    // 跳转至主页
     startActivity(new Intent(this, MainActivity.class));
     finish();
 }
 ```
 
-### 2.2 启动广告页 (AdActivity)
+### 2.3 启动广告页 (AdActivity)
 **设计思路**：
-在进入主页前展示 5 秒开屏广告，增强商业变现能力，同时支持用户手动跳过。
+在进入主页前展示 5 秒开屏广告，兼顾商业价值与用户体验，提供“跳过”按钮以尊重用户选择。
 **实现细节**：
 使用 `Glide` 加载网络广告图。利用 Android 原生 `CountDownTimer` 实现倒计时逻辑。倒计时结束或用户点击“跳过”按钮时，跳转至主页并销毁当前页面，防止用户按返回键回到广告页。
 
@@ -75,9 +97,9 @@ countDownTimer = new CountDownTimer(5000, 1000) {
 countDownTimer.start();
 ```
 
-### 2.3 主界面容器 (MainActivity)
+### 2.4 主界面容器 (MainActivity)
 **设计思路**：
-作为整个应用的容器，负责管理 Fragment 的导航（Navigation）以及启动流程的分发。
+作为整个应用的容器和导航中枢，负责管理 Fragment 的路由分发和底部导航栏的切换。
 **实现细节**：
 在 `onCreate` 中首先检查是否首次运行（跳转引导页）或是否需要展示广告（跳转广告页）。如果不需要，则初始化 `BottomNavigationView` 并与 `NavController` 绑定，实现底部导航栏的切换逻辑。同时处理返回键逻辑，防止误触退出。
 
@@ -102,9 +124,9 @@ getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 });
 ```
 
-### 2.4 主页面 (HomeFragment)
+### 2.5 主页面 (HomeFragment)
 **设计思路**：
-作为应用的核心入口，采用垂直滚动布局。顶部为自动轮播的 Banner，中间为快捷功能入口，下方为资讯列表。
+作为应用的核心入口，采用垂直滚动布局。顶部为自动轮播的 Banner 展示重要活动，中间为快捷功能入口，下方为实时资讯列表。
 **实现细节**：
 *   **MVVM 数据驱动**：通过 `observeViewModel` 监听 `HomeViewModel` 中的 `LiveData` 数据变化。当 `ads` 或 `news` 数据更新时，自动刷新 Banner 和 RecyclerView，实现 UI 与逻辑的解耦。
 *   **下拉刷新**：集成 `SmartRefreshLayout`，配合 `ClassicsHeader` 实现经典的下拉刷新效果。
@@ -131,12 +153,11 @@ private void observeViewModel() {
 }
 ```
 
-### 2.5 课程分类页 (CourseFragment)
+### 2.6 课程分类页 (CourseFragment)
 **设计思路**：
-复用同一个 Fragment 展示不同类型的课程（如算法、实战、开源项目），减少代码冗余。
-
+通过复用同一个 Fragment 来展示不同类型的课程（如算法、实战、开源项目），提高代码复用率，降低维护成本。
 **实现细节**：
-通过 `Navigation` 传递参数 `course_type`。在 `loadData` 中根据参数动态设置页面标题，并请求对应的 API 接口。
+通过 `Navigation` 传递参数 `course_type`。在 `loadData` 中根据参数动态设置页面标题，并请求对应的 API 接口加载数据。
 
 **核心代码**：
 ```java
@@ -153,10 +174,9 @@ private void loadData() {
 }
 ```
 
-### 2.6 资讯详情页 (WebFragment)
+### 2.7 资讯详情页 (WebFragment)
 **设计思路**：
-提供一个内置的 Web 浏览器来加载新闻详情，避免跳转到外部浏览器。
-
+提供一个内置的 Web 浏览器来加载新闻详情，支持沉浸式阅读体验，避免跳转到外部浏览器打断用户流程。
 **实现细节**：
 使用 `AgentWeb` 库替代原生 WebView。它封装了进度条、JS 交互和 WebChromeClient，极大简化了 Web 页面的加载逻辑，并自动处理了生命周期管理。
 
@@ -184,7 +204,7 @@ public void onPause() {
 
 ### 3.1 图表导航页 (ChartFragment)
 **设计思路**：
-打破传统的列表导航，使用全屏背景 + 右下角悬浮按钮的设计，增加应用的趣味性。
+打破传统的列表导航，使用全屏背景 + 右下角悬浮按钮的设计，通过趣味性的交互提升用户探索欲。
 **实现细节**：
 集成 `BoomMenu` 库，配置为“爆炸展开”效果。构建多个 `TextOutsideCircleButton` 子菜单，分别对应柱状图、折线图和饼图，点击后通过 Navigation 跳转。
 
@@ -208,7 +228,7 @@ bmb.addBuilder(builder);
 
 ### 3.2 柱状图页 (BarFragment)
 **设计思路**：
-直观展示“编程语言热度”排行。
+使用柱状图直观展示“编程语言热度”排行，便于用户进行横向对比。
 **实现细节**：
 使用 `MPAndroidChart` 的 `BarChart`。通过 `IndexAxisValueFormatter` 自定义 X 轴标签（显示语言名称）。配置 `animateY(1000)` 实现 Y 轴升起动画，提升视觉体验。
 
@@ -239,7 +259,7 @@ barViewModel.getData().observe(getViewLifecycleOwner(), data -> {
 
 ### 3.3 折线图页 (LineFragment)
 **设计思路**：
-展示“新增用户数”的趋势变化。
+使用折线图展示“新增用户数”的趋势变化，帮助用户了解平台的发展态势。
 **实现细节**：
 *   **曲线平滑**：设置 `Mode.CUBIC_BEZIER` 启用贝塞尔曲线模式，使折线更加圆润自然。
 *   **视觉增强**：开启 `setDrawFilled` 并配置主题色填充 (`setFillColor`) 及透明度 (`setFillAlpha`)，增强图表的视觉层次感。
@@ -267,7 +287,7 @@ lineChart.animateY(1000); // 启动动画
 
 ### 3.4 饼图页 (PieFragment)
 **设计思路**：
-展示“技术栈分布”的占比情况。
+使用饼图展示“技术栈分布”的占比情况，清晰呈现各部分的比例关系。
 **实现细节**：
 *   **数据格式化**：使用 `PercentFormatter` 自动将数值转换为百分比格式。
 *   **布局优化**：将数值显示在扇区外部 (`OUTSIDE_SLICE`) 以防拥挤；调整 `Legend` (图例) 至底部居中，避免遮挡图表主体。
@@ -295,7 +315,7 @@ l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
 
 ### 4.1 视频列表页 (VideoFragment)
 **设计思路**：
-采用列表形式展示视频课程，每项包含封面、标题和简介。
+采用列表形式高效展示视频课程，每项包含封面、标题和简介，支持快速浏览。
 **实现细节**：
 使用 `RecyclerView` + `BaseRecyclerViewAdapterHelper`。设置点击监听器，点击列表项时将 `Video` 对象序列化并通过 Bundle 传递给详情页，实现数据的跨页面传递。
 
@@ -322,7 +342,7 @@ private void initRecyclerView() {
 
 ### 4.2 视频详情页 (VideoDetailFragment)
 **设计思路**：
-集播放与介绍于一体。顶部为视频播放窗口，下方使用 `TabLayout` 切换“简介”和“选集”。
+集播放与介绍于一体。顶部为视频播放窗口，下方使用 `TabLayout` 切换“简介”和“选集”，提供完整的课程学习体验。
 **实现细节**：
 核心组件为 `GSYVideoPlayer`。
 *   **功能配置**：通过 `GSYVideoOptionBuilder` 进行链式配置，开启手势控制、设置封面图、配置全屏/旋转回调。
@@ -361,8 +381,7 @@ new GSYVideoOptionBuilder()
 
 ### 5.1 个人中心页 (MeFragment)
 **设计思路**：
-根据用户的登录状态动态展示 UI。
-
+作为用户信息的展示中心，根据用户的登录状态动态展示 UI（已登录显示头像昵称，未登录显示提示），引导用户进行身份认证。
 **实现细节**：
 在 `onResume` 中检查 `UserStorage` (SharedPreferences) 中的登录标志位。
 *   **已登录**：显示头像、昵称、邮箱及学习数据。
@@ -387,7 +406,7 @@ private void refreshUserState() {
 
 ### 5.2 注册页 (RegisterFragment)
 **设计思路**：
-完整的注册流程，包含邮箱验证码发送和表单提交。
+提供完整的注册流程，包含邮箱验证码发送和表单提交，确保注册用户的真实性。
 **实现细节**：
 *   **交互闭环**：通过 `LiveData` 监听验证码发送状态 (`getSendCodeResult`) 和注册结果 (`getRegisterResult`)。
 *   **用户反馈**：使用 `XPopup` 弹窗展示加载中、成功或失败的提示，提升用户体验。
@@ -420,7 +439,7 @@ private void initObservers() {
 
 ### 5.3 登录页 (LoginFragment)
 **设计思路**：
-简洁的登录表单，支持跳转注册和找回密码。
+提供简洁的登录表单，支持跳转注册和找回密码，构建完整的账号体系闭环。
 **实现细节**：
 *   **登录触发**：点击按钮调用 `handleLogin`，校验输入后调用 `ViewModel` 进行登录。
 *   **状态监听**：通过 `initObservers` 监听登录结果。成功时保存用户信息并弹窗提示，随后返回上一页；失败时弹出错误提示。
@@ -459,7 +478,7 @@ private void initObservers() {
 
 ### 5.4 忘记密码页 (ForgetPasswordFragment)
 **设计思路**：
-通过验证码找回密码，保障账号安全。
+通过验证码找回密码，保障账号安全，解决用户忘记密码的痛点。
 **实现细节**：
 重置密码成功后，为了安全起见，强制清除本地登录状态 (`userStorage.setLogin(false)`)，并引导用户重新登录。
 
@@ -477,7 +496,7 @@ viewModel.getResetPasswordResult().observe(getViewLifecycleOwner(), success -> {
 
 ### 5.5 个人资料页 (AccountProfileFragment)
 **设计思路**：
-允许用户修改昵称、简介，或退出登录。
+允许用户修改昵称、简介等个人信息，或退出登录，赋予用户对自己账号的控制权。
 **实现细节**：
 退出登录时，调用 `userStorage.logout()` 清除所有本地用户信息，并弹出 Loading 弹窗提示。
 
@@ -493,8 +512,7 @@ private void performLogout(View v) {
 
 ### 5.6 安全隐私页 (SecurityPrivacyFragment)
 **设计思路**：
-用户修改登录密码的入口，需要再次验证邮箱验证码。
-
+提供修改登录密码的入口，需要再次验证邮箱验证码，进一步增强账号安全性。
 **实现细节**：
 输入旧密码（或验证码）和新密码，调用后端接口更新密码。
 
@@ -511,8 +529,7 @@ private void updatePassword(View v) {
 
 ### 5.7 地址列表页 (AddressListFragment)
 **设计思路**：
-展示用户的收货地址列表，支持长按删除操作。
-
+展示用户的收货地址列表，支持长按删除操作，方便用户管理多个地址。
 **实现细节**：
 使用 `RecyclerView` 展示地址。为 Adapter 设置 `OnItemLongClickListener`，长按时弹出 `XPopup` 确认框，用户确认后调用删除接口。
 
@@ -532,7 +549,7 @@ adapter.setOnItemLongClickListener((adapter, view, position) -> {
 
 ### 5.8 地址新增/编辑页 (AddressAddFragment)
 **设计思路**：
-复用同一个页面进行新增和编辑。支持跳转到搜索页面选择地址。
+复用同一个页面进行新增和编辑，减少开发工作量。支持跳转到搜索页面选择地址，提升输入效率。
 **实现细节**：
 *   **数据回填**：如果是编辑模式，初始化时填充已有数据。
 *   **搜索结果接收**：使用 `setFragmentResultListener` 监听搜索页面返回的数据，自动填充地址栏。
@@ -553,7 +570,7 @@ getParentFragmentManager().setFragmentResultListener("address_request", getViewL
 
 ### 5.9 地址搜索页 (AddressSearchFragment)
 **设计思路**：
-集成高德地图，实现“所见即所得”的地址搜索。
+集成高德地图 SDK，实现“所见即所得”的地址搜索与定位功能。
 **实现细节**：
 *   **搜索联动**：监听 `ViewModel` 的搜索结果 `LiveData`，获取到数据后自动刷新列表并更新地图视角。
 *   **地图更新**：解析 API 返回的经纬度，清除旧 Marker，添加新 Marker 并移动相机。
@@ -585,3 +602,19 @@ private void updateMap(AmapTip tip) {
     }
 }
 ```
+
+---
+
+## 6. 项目总结与展望
+
+### 6.1 项目总结
+本项目成功构建了一个功能完善的 Android 在线教育平台，通过实践验证了 **MVVM 架构** 在中型项目中的优越性。
+*   **架构规范**：严格遵守 MVVM 分层设计，ViewModel 负责业务逻辑，Fragment 负责 UI 渲染，结构清晰，易于测试和维护。
+*   **技术栈先进**：整合了 Jetpack 全家桶 (Lifecycle, ViewModel, LiveData, Navigation) 以及 Retrofit, Glide 等主流开源库，技术选型符合当前行业标准。
+*   **用户体验良好**：细节打磨到位，如视频播放的手势控制、图表的动态动画、地图搜索的实时联动等，提供了流畅的交互体验。
+
+### 6.2 未来展望
+虽然目前项目已具备核心功能，但在以下方面仍有改进空间：
+*   **深色模式支持**：进一步完善 UI 资源，适配 Android 系统的深色模式，提供更舒适的夜间使用体验。
+*   **课程互动**：增加评论区、弹幕功能，增强用户与课程内容的互动性。
+*   **离线缓存**：引入 Room 数据库实现更完善的数据缓存策略，支持视频离线下载观看。

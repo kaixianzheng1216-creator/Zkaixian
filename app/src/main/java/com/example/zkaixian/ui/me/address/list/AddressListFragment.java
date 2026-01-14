@@ -63,14 +63,12 @@ public class AddressListFragment extends Fragment {
         });
 
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
-            if (view.getId() == R.id.item_address_tv_address) {
-                Address address = (Address) adapter.getItem(position);
+            Address address = (Address) adapter.getItem(position);
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("address_data", address);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("address_data", address);
 
-                Navigation.findNavController(view).navigate(R.id.action_addressListFragment_to_addressAddFragment, bundle);
-            }
+            Navigation.findNavController(view).navigate(R.id.action_addressListFragment_to_addressAddFragment, bundle);
         });
 
         adapter.setOnItemLongClickListener((adapter, view, position) -> {
