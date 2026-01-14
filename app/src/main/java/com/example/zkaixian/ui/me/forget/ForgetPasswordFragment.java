@@ -46,8 +46,6 @@ public class ForgetPasswordFragment extends Fragment {
 
         viewModel.getResetPasswordResult().observe(getViewLifecycleOwner(), success -> {
             if (success) {
-                userStorage.setLogin(false);
-
                 new XPopup.Builder(requireContext())
                         .dismissOnTouchOutside(false)
                         .setPopupCallback(new SimpleCallback() {

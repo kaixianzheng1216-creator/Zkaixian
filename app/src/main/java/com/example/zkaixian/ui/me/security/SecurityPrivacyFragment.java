@@ -47,6 +47,8 @@ public class SecurityPrivacyFragment extends Fragment {
 
         viewModel.getUpdatePasswordResult().observe(getViewLifecycleOwner(), success -> {
             if (success) {
+                userStorage.setLogin(false);
+
                 new XPopup.Builder(requireContext())
                         .dismissOnTouchOutside(false)
                         .setPopupCallback(new SimpleCallback() {
