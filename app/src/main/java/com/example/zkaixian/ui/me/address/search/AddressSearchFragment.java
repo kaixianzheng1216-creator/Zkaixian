@@ -16,6 +16,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.MarkerOptions;
 import com.example.zkaixian.adapter.AmapTipAdapter;
 import com.example.zkaixian.databinding.FragmentAddressSearchBinding;
 import com.example.zkaixian.pojo.AmapTip;
@@ -24,10 +28,10 @@ import com.lxj.xpopup.XPopup;
 import java.util.ArrayList;
 
 public class AddressSearchFragment extends Fragment {
-
     private FragmentAddressSearchBinding binding;
     private AddressSearchViewModel viewModel;
     private AmapTipAdapter adapter;
+    private AMap aMap;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,6 +92,10 @@ public class AddressSearchFragment extends Fragment {
         binding.addressSearchFragmentRvList.setAdapter(adapter);
 
         binding.addressSearchFragmentEtSearch.requestFocus();
+
+        if (aMap == null) {
+            aMap = binding.addressSearchFragmentMapView.getMap();
+        }
     }
 
     private void initListener() {
@@ -137,8 +145,10 @@ public class AddressSearchFragment extends Fragment {
 
     private void initObservers() {
         viewModel.getSearchResult().observe(getViewLifecycleOwner(), tips -> {
-            if (tips != null) {
+            if (!tips.isEmpty()) {
                 adapter.setList(tips);
+
+                updateMap(tips.get(0));
             }
         });
 
@@ -165,6 +175,32 @@ public class AddressSearchFragment extends Fragment {
             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 
             imm.hideSoftInputFromWindow(binding.addressSearchFragmentEtSearch.getWindowToken(), 0);
+        }
+    }
+
+    private void updateMap(AmapTip tip) {
+        if (tip == null || tip.getLocation() == null || tip.getLocation().isEmpty()) {
+            return;
+        }
+
+        String[] loc = tip.getLocation().split(",");
+
+        if (loc.length == 2) {
+            double lon = Double.parseDouble(loc[0]);
+            double lat = Double.parseDouble(loc[1]);
+
+            LatLng latLng = new LatLng(lat, lon);
+
+            if (aMap != null) {
+                aMap.clear();
+
+                aMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title(tip.getName())
+                        .snippet(tip.getAddress()));
+
+                aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+            }
         }
     }
 }
